@@ -217,6 +217,8 @@ vim.o.termguicolors = true
 -- [[ Basic Keymaps ]]
 
 -- Keymaps for better default experience
+vim.keymap.set('n', '<C-s>', vim.cmd.w, { desc = '[S]ave file' })
+
 -- See `:help vim.keymap.set()`
 vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 
