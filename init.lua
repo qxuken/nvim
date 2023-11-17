@@ -217,6 +217,7 @@ vim.o.termguicolors = true
 -- [[ Basic Keymaps ]]
 
 -- Keymaps for better default experience
+vim.keymap.set({ 'n', 'v' }, '<leader>qq', vim.cmd.quit, { desc = '[Q]uit window' })
 vim.keymap.set('n', '<C-s>', vim.cmd.w, { desc = '[S]ave file' })
 
 -- See `:help vim.keymap.set()`
