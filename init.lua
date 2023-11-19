@@ -198,11 +198,32 @@ require('lazy').setup({
 
     },
     init = function()
-      -- disable netrw at the very start of your init.lua
+      -- disable netrw
       vim.g.loaded_netrw = 1
       vim.g.loaded_netrwPlugin = 1
     end,
-  }
+  },
+
+  {
+    'akinsho/toggleterm.nvim',
+    version = '*',
+    opts = {
+      size = 20,
+    },
+    init = function()
+      local Terminal = require('toggleterm.terminal').Terminal
+      local lazygit  = Terminal:new({ cmd = "lazygit", count = 5, direction = "float" })
+
+      vim.keymap.set("n", "<leader>go", function()
+        lazygit:toggle()
+      end, { desc = "Lazy[G]it t[O]ggle" })
+    end,
+    keys = {
+      { "<leader>th", "<cmd>ToggleTerm direction=horizontal<cr>", desc = "[T]erminal toggle [H]orizontal" },
+      { "<leader>tv", "<cmd>ToggleTerm direction=vertical<cr>",   desc = "[T]erminal toggle [V]ertical" },
+      { "<leader>tf", "<cmd>ToggleTerm direction=float<cr>",      desc = "[T]erminal toggle [F]loat" },
+    },
+  },
 
   -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
   --    You can use this folder to prevent any conflicts with this init.lua if you're interested in keeping
