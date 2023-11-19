@@ -174,6 +174,12 @@ require('lazy').setup({
     dependencies = {
       "nvim-tree/nvim-web-devicons",
     },
+    keys = {
+      { "<leader>tt", "<cmd>NvimTreeToggle<cr>",   desc = "[T]ree [T]oggle" },
+      { "<leader>tf", "<cmd>NvimTreeFocus<cr>",    desc = "[T]ree [F]ocus" },
+      { "<leader>tb", "<cmd>NvimTreeFindFile<cr>", desc = "Open [T]ree focused on current [B]uffer" },
+      { "<leader>tc", "<cmd>NvimTreeCollapse<cr>", desc = "[T]ree [C]ollapse" },
+    },
     opts = {
       on_attach = function(bufnr)
         local api = require "nvim-tree.api"
@@ -256,7 +262,7 @@ vim.o.termguicolors = true
 -- [[ Basic Keymaps ]]
 
 -- Keymaps for better default experience
-vim.keymap.set({ 'v', 'n' }, '<leader>qq', vim.cmd.quit, { desc = '[Q]uit window' })
+vim.keymap.set({ 'v', 'n' }, '<leader>qq', vim.cmd.quita, { desc = '[Q]uit vim' })
 vim.keymap.set('n', '<C-s>', vim.cmd.w, { desc = '[S]ave file' })
 
 -- See `:help vim.keymap.set()`
@@ -406,7 +412,7 @@ local on_attach = function(_, bufnr)
     vim.keymap.set('n', keys, func, { buffer = bufnr, desc = desc })
   end
 
-  nmap('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
+  nmap('<leader>cr', vim.lsp.buf.rename, '[C]ode [R]ename')
   nmap('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
   nmap('<leader>cf', vim.lsp.buf.format, '[C]ode [F]ormat')
 
