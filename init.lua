@@ -94,17 +94,17 @@ require('lazy').setup({
     "catppuccin/nvim",
     name = "catppuccin",
     priority = 1000,
-    opts = {},
-    config = function()
-      require("catppuccin").setup({
-        integrations = {
-          cmp = true,
-          gitsigns = true,
-          nvimtree = true,
-          treesitter = true,
-          mason = true,
-        }
-      })
+    opts = {
+      integrations = {
+        cmp = true,
+        gitsigns = true,
+        nvimtree = true,
+        treesitter = true,
+        mason = true,
+      }
+    },
+    config = function(_, opts)
+      require("catppuccin").setup(opts)
       vim.cmd.colorscheme "catppuccin-mocha"
     end
   },
@@ -167,6 +167,37 @@ require('lazy').setup({
 
   { 'codota/tabnine-nvim', build = "./dl_binaries.sh" },
 
+  {
+    "nvim-tree/nvim-tree.lua",
+    version = "*",
+    lazy = false,
+    dependencies = {
+      "nvim-tree/nvim-web-devicons",
+    },
+    opts = {
+      on_attach = function(bufnr)
+        local api = require "nvim-tree.api"
+
+        local function opts(desc)
+          return { desc = "nvim-tree: " .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true }
+        end
+
+        -- default mappings
+        api.config.mappings.default_on_attach(bufnr)
+
+        -- custom mappings
+        vim.keymap.set('n', '<C-t>', api.tree.change_root_to_parent, opts('Up'))
+        vim.keymap.set('n', '?', api.tree.toggle_help, opts('Help'))
+      end,
+
+    },
+    init = function()
+      -- disable netrw at the very start of your init.lua
+      vim.g.loaded_netrw = 1
+      vim.g.loaded_netrwPlugin = 1
+    end,
+  }
+
   -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
   --    You can use this folder to prevent any conflicts with this init.lua if you're interested in keeping
   --    up-to-date with whatever is in the kickstart repo.
@@ -214,10 +245,18 @@ vim.o.completeopt = 'menuone,noselect'
 -- NOTE: You should make sure your terminal supports this
 vim.o.termguicolors = true
 
+-- -- Blankline indent setup
+-- vim.opt.list = true
+-- vim.opt.listchars = {
+--   leadmultispace = "│   ",
+--   multispace = "│ ",
+--   tab = "│ ",
+-- }
+
 -- [[ Basic Keymaps ]]
 
 -- Keymaps for better default experience
-vim.keymap.set({ 'n', 'v' }, '<leader>qq', vim.cmd.quit, { desc = '[Q]uit window' })
+vim.keymap.set({ 'v', 'n' }, '<leader>qq', vim.cmd.quit, { desc = '[Q]uit window' })
 vim.keymap.set('n', '<C-s>', vim.cmd.w, { desc = '[S]ave file' })
 
 -- See `:help vim.keymap.set()`
@@ -228,8 +267,9 @@ vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = tr
 vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 
 -- Remap for dealing with buffers
-vim.keymap.set('n', ']b', vim.cmd.bNext, { desc = "Next [B]uffer" })
-vim.keymap.set('n', '[b', vim.cmd.bprevious, { desc = "Prev [B]uffer" })
+vim.keymap.set('n', ']b', vim.cmd.bNext, { desc = "[N]ext [B]uffer" })
+vim.keymap.set('n', '[b', vim.cmd.bprevious, { desc = "[P]rev [B]uffer" })
+vim.keymap.set({ 'v', 'n' }, '<leader>bd', vim.cmd.bd, { desc = '[B]uffer [D]eletion' })
 
 -- [[ Highlight on yank ]]
 -- See `:help vim.highlight.on_yank()`
