@@ -81,6 +81,10 @@ vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next [D]iagn
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Show diagnostic [E]rror messages' })
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
 
+-- Quickfix keymaps
+vim.keymap.set('n', '[c', '<cmd>cprev<CR>', { desc = 'Go to prev Quickfix item' })
+vim.keymap.set('n', ']c', '<cmd>cnext<CR>', { desc = 'Go to next Quickfix item' })
+
 -- Convinient save
 vim.keymap.set('i', '<C-s>', '<Esc><cmd>w<CR>')
 vim.keymap.set('n', '<C-s>', '<cmd>w<CR>')
@@ -94,10 +98,10 @@ vim.keymap.set('n', '<C-s>', '<cmd>w<CR>')
 vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
 
 -- TIP: Disable arrow keys in normal mode
-vim.keymap.set({ 'n', 'v', 'i' }, '<left>', '<cmd>echo "Use h to move!!"<CR>')
-vim.keymap.set({ 'n', 'v', 'i' }, '<right>', '<cmd>echo "Use l to move!!"<CR>')
-vim.keymap.set({ 'n', 'v', 'i' }, '<up>', '<cmd>echo "Use k to move!!"<CR>')
-vim.keymap.set({ 'n', 'v', 'i' }, '<down>', '<cmd>echo "Use j to move!!"<CR>')
+vim.keymap.set({ 'n', 'v' }, '<left>', '<cmd>echo "Use h to move!!"<CR>')
+vim.keymap.set({ 'n', 'v' }, '<right>', '<cmd>echo "Use l to move!!"<CR>')
+vim.keymap.set({ 'n', 'v' }, '<up>', '<cmd>echo "Use k to move!!"<CR>')
+vim.keymap.set({ 'n', 'v' }, '<down>', '<cmd>echo "Use j to move!!"<CR>')
 
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
