@@ -1,22 +1,25 @@
--- Set <space> as the leader key
 -- See `:help mapleader`
 --  NOTE: Must happen before plugins are loaded (otherwise wrong leader will be used)
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
+-- Disable netrw
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+
 -- Set to true if you have a Nerd Font installed
 vim.g.have_nerd_font = true
 
--- [[ Setting options ]]
+-- Enable 24-bit colour
+vim.opt.termguicolors = true
+
 -- See `:help vim.opt`
--- NOTE: You can change these options as you wish!
---  For more options, you can see `:help option-list`
 
 -- Make line numbers default
 vim.opt.number = true
 -- You can also add relative line numbers, to help with jumping.
 --  Experiment for yourself to see if you like it!
--- vim.opt.relativenumber = true
+vim.opt.relativenumber = true
 
 -- Enable mouse mode, can be useful for resizing splits for example!
 vim.opt.mouse = 'a'
@@ -27,7 +30,7 @@ vim.opt.showmode = false
 -- Sync clipboard between OS and Neovim.
 --  Remove this option if you want your OS clipboard to remain independent.
 -- --  See `:help 'clipboard'`
--- vim.opt.clipboard = 'unnamedplus'
+vim.opt.clipboard = 'unnamedplus'
 
 -- Enable break indent
 vim.opt.breakindent = true
@@ -69,7 +72,14 @@ vim.opt.inccommand = 'split'
 vim.opt.scrolloff = 10
 
 -- [[ Basic Keymaps ]]
---  See `:help vim.keymap.set()`
+
+vim.keymap.set('n', '<leader>bd', '<cmd>bd<CR>', { desc = '[Q]uit [B]uffer' })
+
+-- Keybinds to make split navigation easier.
+vim.keymap.set('n', '<C-h>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
+vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
+vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
+vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
 
 -- Set highlight on search, but clear on pressing <Esc> in normal mode
 vim.opt.hlsearch = true
@@ -82,12 +92,20 @@ vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Show diagn
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
 
 -- Quickfix keymaps
-vim.keymap.set('n', '[c', '<cmd>cprev<CR>', { desc = 'Go to prev Quickfix item' })
-vim.keymap.set('n', ']c', '<cmd>cnext<CR>', { desc = 'Go to next Quickfix item' })
+vim.keymap.set('n', '[q', '<cmd>cprev<CR>', { desc = 'Go to prev [Q]uickfix item' })
+vim.keymap.set('n', ']q', '<cmd>cnext<CR>', { desc = 'Go to next [Q]uickfix item' })
+
+-- Buffer keymaps
+vim.keymap.set('n', '[b', '<cmd>bprevious<CR>', { desc = 'Go to prev [B]uffer' })
+vim.keymap.set('n', ']b', '<cmd>bnext<CR>', { desc = 'Go to next [B]uffer' })
 
 -- Convinient save
 vim.keymap.set('i', '<C-s>', '<Esc><cmd>w<CR>')
 vim.keymap.set('n', '<C-s>', '<cmd>w<CR>')
+
+-- Goto keymaps
+vim.keymap.set('n', 'gh', '^', { desc = '[G]o to start of the line' })
+vim.keymap.set('n', 'gl', '$', { desc = '[G]o to end of the line' })
 
 -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
 -- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
@@ -143,23 +161,46 @@ require('lazy').setup({
   -- Detect tabstop and shiftwidth automatically
   'tpope/vim-sleuth',
 
-  -- A vim-vinegar like file explorer that lets you edit your filesystem like a normal Neovim buffer
+  -- Auto Session takes advantage of Neovim's existing session management capabilities to provide seamless automatic session management.
   {
-    'stevearc/oil.nvim',
-    event = 'VimEnter',
-    -- Optional dependencies
-    dependencies = {
-      { 'nvim-tree/nvim-web-devicons', enabled = vim.g.have_nerd_font },
-    },
-    opts = {},
+    'rmagatti/auto-session',
+    lazy = false,
+    opts = { auto_session_suppress_dirs = { '~/', '~/projects', '~/Downloads', '/' } },
+  },
+
+  -- A File Explorer For Neovim
+  {
+    'nvim-tree/nvim-tree.lua',
+    lazy = false,
     keys = {
-      {
-        '<leader>-',
-        '<cmd>Oil<CR>',
-        mode = 'n',
-        desc = 'Open parent directory',
-      },
+      { '<C-t>', '<cmd>NvimTreeToggle<CR>', desc = 'Toggle Nvim[T]ree' },
+      { '<leader>tt', '<cmd>NvimTreeToggle<CR>', desc = 'Nvim[T]ree [T]oggle' },
+      { '<leader>tf', '<cmd>NvimTreeFindFile<CR>', desc = 'Nvim[T]ree [F]indFile' },
     },
+    dependencies = {
+      'nvim-tree/nvim-web-devicons',
+    },
+    config = function()
+      require('nvim-tree').setup()
+      vim.api.nvim_create_autocmd('QuitPre', {
+        callback = function()
+          local invalid_win = {}
+          local wins = vim.api.nvim_list_wins()
+          for _, w in ipairs(wins) do
+            local bufname = vim.api.nvim_buf_get_name(vim.api.nvim_win_get_buf(w))
+            if bufname:match 'NvimTree_' ~= nil then
+              table.insert(invalid_win, w)
+            end
+          end
+          if #invalid_win == #wins - 1 then
+            -- Should quit, so we close all invalid windows.
+            for _, w in ipairs(invalid_win) do
+              vim.api.nvim_win_close(w, true)
+            end
+          end
+        end,
+      })
+    end,
   },
 
   -- "gc" to comment visual regions/lines
@@ -190,9 +231,11 @@ require('lazy').setup({
       require('which-key').register {
         ['<leader>c'] = { name = '[C]ode', _ = 'which_key_ignore' },
         ['<leader>d'] = { name = '[D]ocument', _ = 'which_key_ignore' },
+        ['<leader>b'] = { name = '[B]uffer', _ = 'which_key_ignore' },
         ['<leader>r'] = { name = '[R]ename', _ = 'which_key_ignore' },
         ['<leader>s'] = { name = '[S]earch', _ = 'which_key_ignore' },
         ['<leader>w'] = { name = '[W]orkspace', _ = 'which_key_ignore' },
+        ['<leader>t'] = { name = 'Nvim[T]ree', _ = 'which_key_ignore' },
       }
     end,
   },
@@ -239,7 +282,11 @@ require('lazy').setup({
         --     i = { ['<c-enter>'] = 'to_fuzzy_refine' },
         --   },
         -- },
-        -- pickers = {}
+        pickers = {
+          buffers = {
+            sort_lastused = true,
+          },
+        },
         extensions = {
           ['ui-select'] = {
             require('telescope.themes').get_dropdown(),
@@ -255,13 +302,14 @@ require('lazy').setup({
       local builtin = require 'telescope.builtin'
       vim.keymap.set('n', '<leader>sh', builtin.help_tags, { desc = '[S]earch [H]elp' })
       vim.keymap.set('n', '<leader>sk', builtin.keymaps, { desc = '[S]earch [K]eymaps' })
-      vim.keymap.set('n', '<leader>sf', builtin.find_files, { desc = '[S]earch [F]iles' })
+      vim.keymap.set('n', '<leader>f', builtin.find_files, { desc = 'Search [F]iles' })
       vim.keymap.set('n', '<leader>ss', builtin.builtin, { desc = '[S]earch [S]elect Telescope' })
       vim.keymap.set('n', '<leader>sw', builtin.grep_string, { desc = '[S]earch current [W]ord' })
-      vim.keymap.set('n', '<leader>sg', builtin.live_grep, { desc = '[S]earch by [G]rep' })
+      vim.keymap.set('n', '<leader>g', builtin.live_grep, { desc = 'Search by [G]rep' })
       vim.keymap.set('n', '<leader>sd', builtin.diagnostics, { desc = '[S]earch [D]iagnostics' })
       vim.keymap.set('n', '<leader>sr', builtin.resume, { desc = '[S]earch [R]esume' })
       vim.keymap.set('n', '<leader>s.', builtin.oldfiles, { desc = '[S]earch Recent Files ("." for repeat)' })
+      vim.keymap.set('n', '<leader>j', builtin.jumplist, { desc = 'Open jumplist' })
       vim.keymap.set('n', '<leader><leader>', builtin.buffers, { desc = '[ ] Find existing buffers' })
 
       -- Slightly advanced example of overriding default behavior and theme
@@ -448,7 +496,7 @@ require('lazy').setup({
     lazy = false,
     keys = {
       {
-        '<leader>f',
+        '<leader>cf',
         function()
           require('conform').format { async = true, lsp_fallback = true }
         end,
@@ -597,10 +645,9 @@ require('lazy').setup({
     end,
   },
 
-  -- Highlight todo, notes, etc in comments
   { 'folke/todo-comments.nvim', event = 'VimEnter', dependencies = { 'nvim-lua/plenary.nvim' }, opts = { signs = false } },
 
-  { -- Collection of various small independent plugins/modules
+  {
     'echasnovski/mini.nvim',
     config = function()
       -- Better Around/Inside textobjects
@@ -618,23 +665,12 @@ require('lazy').setup({
       -- - sr)'  - [S]urround [R]eplace [)] [']
       require('mini.surround').setup()
 
-      -- Simple and easy statusline.
-      --  You could remove this setup call if you don't like it,
-      --  and try some other statusline plugin
       local statusline = require 'mini.statusline'
-      -- set use_icons to true if you have a Nerd Font
       statusline.setup { use_icons = vim.g.have_nerd_font }
-
-      -- You can configure sections in the statusline by overriding their
-      -- default behavior. For example, here we set the section for
-      -- cursor location to LINE:COLUMN
       ---@diagnostic disable-next-line: duplicate-set-field
       statusline.section_location = function()
         return '%2l:%-2v'
       end
-
-      -- ... and there is more!
-      --  Check out: https://github.com/echasnovski/mini.nvim
     end,
   },
   { -- Highlight, edit, and navigate code
@@ -668,18 +704,89 @@ require('lazy').setup({
     end,
   },
 
-  -- The following two comments only work if you have downloaded the kickstart repo, not just copy pasted the
-  -- init.lua. If you want these files, they are in the repository, so you can just download them and
-  -- place them in the correct locations.
+  -- Effortlessly open the URL under the cursor
+  {
+    'sontungexpt/url-open',
+    branch = 'mini',
+    event = 'VeryLazy',
+    cmd = 'URLOpenUnderCursor',
+    keys = {
+      { 'gx', '<esc>:URLOpenUnderCursor<cr>', desc = '[G]o to link under cursor' },
+    },
+    config = function()
+      local status_ok, url_open = pcall(require, 'url-open')
+      if not status_ok then
+        return
+      end
+      url_open.setup {}
+    end,
+  },
 
-  -- NOTE: Next step on your Neovim journey: Add/Configure additional plugins for Kickstart
-  --
-  --  Here are some example plugins that I've included in the Kickstart repository.
-  --  Uncomment any of the lines below to enable them (you will need to restart nvim).
-  --
-  -- require 'kickstart.plugins.debug',
-  -- require 'kickstart.plugins.indent_line',
-  -- require 'kickstart.plugins.lint',
+  {
+    'nvim-neotest/neotest',
+    dependencies = {
+      'nvim-neotest/nvim-nio',
+      'nvim-lua/plenary.nvim',
+      'antoinemadec/FixCursorHold.nvim',
+      'nvim-treesitter/nvim-treesitter',
+      'thenbe/neotest-playwright',
+      'vim-test/vim-test',
+      'nvim-neotest/neotest-vim-test',
+    },
+    keys = {
+      {
+        '<leader>nf',
+        function()
+          require('neotest').run.run(vim.fn.expand '%')
+        end,
+        desc = '[N]eoTest [F]ile',
+      },
+      {
+        '<leader>nn',
+        function()
+          require('neotest').run.run()
+        end,
+        desc = '[N]eoTest [N]earest',
+      },
+      {
+        '<leader>ns',
+        function()
+          require('neotest').run.stop()
+        end,
+        desc = '[N]eoTest [S]top',
+      },
+      {
+        '<leader>na',
+        function()
+          require('neotest').run.attach()
+        end,
+        desc = '[N]eoTest [A]ttach',
+      },
+      {
+        '<leader>np',
+        function()
+          require('neotest').playwright.attachment()
+        end,
+        desc = '[N]eoTest [P]laywright attachment',
+      },
+    },
+    config = function()
+      require('neotest').setup {
+        consumers = {
+          playwright = require('neotest-playwright.consumers').consumers,
+        },
+        adapters = {
+          require('neotest-playwright').adapter {
+            options = {
+              persist_project_selection = true,
+              enable_dynamic_test_discovery = true,
+            },
+          },
+          require 'neotest-vim-test' {},
+        },
+      }
+    end,
+  },
 
   -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
   --    This is the easiest way to modularize your config.
