@@ -85,6 +85,7 @@ vim.keymap.set('n', '<leader>bo', function()
   end
   vim.fn.win_gotoid(current_win)
 end, { silent = true, desc = 'Close all [O]ther [B]uffers except current one.' })
+
 -- Keybinds to make split navigation easier.
 vim.keymap.set('n', '<C-h>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
 vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
@@ -114,8 +115,8 @@ vim.keymap.set('i', '<C-s>', '<Esc><cmd>w<CR>')
 vim.keymap.set('n', '<C-s>', '<cmd>w<CR>')
 
 -- Goto keymaps
-vim.keymap.set('n', 'gh', '^', { desc = '[G]o to start of the line' })
-vim.keymap.set('n', 'gl', '$', { desc = '[G]o to end of the line' })
+vim.keymap.set({ 'n', 'v' }, 'gh', '^', { desc = '[G]o to start of the line' })
+vim.keymap.set({ 'n', 'v' }, 'gl', '$', { desc = '[G]o to end of the line' })
 
 -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
 -- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
@@ -124,12 +125,6 @@ vim.keymap.set('n', 'gl', '$', { desc = '[G]o to end of the line' })
 -- NOTE: This won't work in all terminal emulators/tmux/etc. Try your own mapping
 -- or just use <C-\><C-n> to exit terminal mode
 vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
-
--- TIP: Disable arrow keys in normal mode
-vim.keymap.set({ 'n', 'v' }, '<left>', '<cmd>echo "Use h to move!!"<CR>')
-vim.keymap.set({ 'n', 'v' }, '<right>', '<cmd>echo "Use l to move!!"<CR>')
-vim.keymap.set({ 'n', 'v' }, '<up>', '<cmd>echo "Use k to move!!"<CR>')
-vim.keymap.set({ 'n', 'v' }, '<down>', '<cmd>echo "Use j to move!!"<CR>')
 
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
