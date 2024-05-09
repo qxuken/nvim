@@ -74,7 +74,17 @@ vim.opt.scrolloff = 10
 -- [[ Basic Keymaps ]]
 
 vim.keymap.set('n', '<leader>bd', '<cmd>bd<CR>', { desc = '[Q]uit [B]uffer' })
-
+vim.keymap.set('n', '<leader>bo', function()
+  local current_buf = vim.fn.bufnr()
+  local current_win = vim.fn.win_getid()
+  local bufs = vim.fn.getbufinfo { buflisted = 1 }
+  for _, buf in ipairs(bufs) do
+    if buf.bufnr ~= current_buf then
+      vim.cmd('silent! bdelete ' .. buf.bufnr)
+    end
+  end
+  vim.fn.win_gotoid(current_win)
+end, { silent = true, desc = 'Close all [O]ther [B]uffers except current one.' })
 -- Keybinds to make split navigation easier.
 vim.keymap.set('n', '<C-h>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
 vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
@@ -518,6 +528,7 @@ require('lazy').setup({
       end,
       formatters_by_ft = {
         lua = { 'stylua' },
+        go = { 'goimports', 'gofmt' },
         javascript = { { 'prettierd', 'prettier' } },
       },
     },
@@ -765,12 +776,14 @@ require('lazy').setup({
       {
         '<leader>np',
         function()
+          ---@diagnostic disable-next-line: undefined-field
           require('neotest').playwright.attachment()
         end,
         desc = '[N]eoTest [P]laywright attachment',
       },
     },
     config = function()
+      ---@diagnostic disable-next-line: missing-fields
       require('neotest').setup {
         consumers = {
           playwright = require('neotest-playwright.consumers').consumers,
