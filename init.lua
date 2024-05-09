@@ -171,6 +171,14 @@ require('lazy').setup({
   -- Detect tabstop and shiftwidth automatically
   'tpope/vim-sleuth',
 
+  {
+    'rcarriga/nvim-notify',
+    lazy = false,
+    config = function()
+      vim.notify = require 'notify'
+    end,
+  },
+
   -- Auto Session takes advantage of Neovim's existing session management capabilities to provide seamless automatic session management.
   {
     'rmagatti/auto-session',
@@ -652,17 +660,26 @@ require('lazy').setup({
           dap = true,
           gitsigns = true,
           nvimtree = true,
+          native_lsp = {
+            enabled = true,
+          },
+          mason = true,
           which_key = true,
+          notify = true,
+          treesitter = true,
+          treesitter_context = true,
           mini = {
             enabled = true,
           },
           telescope = {
             enabled = true,
           },
+          neotest = true,
         },
       }
 
       vim.cmd.colorscheme 'catppuccin'
+      vim.cmd.hi 'Comment gui=none'
     end,
   },
 
