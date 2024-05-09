@@ -640,19 +640,29 @@ require('lazy').setup({
   },
 
   {
-    'folke/tokyonight.nvim',
-    priority = 1000, -- Make sure to load this before all the other start plugins.
-    init = function()
-      require('tokyonight').setup {
-        transparent = false,
+    'catppuccin/nvim',
+    name = 'catppuccin',
+    priority = 1000,
+    config = function()
+      require('catppuccin').setup {
+        transparent_background = true,
+        term_colors = true,
+        intergrations = {
+          cmp = true,
+          dap = true,
+          gitsigns = true,
+          nvimtree = true,
+          which_key = true,
+          mini = {
+            enabled = true,
+          },
+          telescope = {
+            enabled = true,
+          },
+        },
       }
-      -- Load the colorscheme here.
-      -- Like many other themes, this one has different styles, and you could load
-      -- any other, such as 'tokyonight-storm', 'tokyonight-moon', or 'tokyonight-day'.
-      vim.cmd.colorscheme 'tokyonight-night'
 
-      -- You can configure highlights by doing something like:
-      vim.cmd.hi 'Comment gui=none'
+      vim.cmd.colorscheme 'catppuccin'
     end,
   },
 
