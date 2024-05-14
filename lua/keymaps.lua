@@ -1,18 +1,5 @@
 local set = vim.keymap.set
 
-set('n', '<leader>bd', '<cmd>bd<CR>', { desc = '[Q]uit [B]uffer' })
-set('n', '<leader>bo', function()
-  local current_buf = vim.fn.bufnr()
-  local current_win = vim.fn.win_getid()
-  local bufs = vim.fn.getbufinfo { buflisted = 1 }
-  for _, buf in ipairs(bufs) do
-    if buf.bufnr ~= current_buf then
-      vim.cmd('silent! bdelete ' .. buf.bufnr)
-    end
-  end
-  vim.fn.win_gotoid(current_win)
-end, { silent = true, desc = 'Close all [O]ther [B]uffers except current one.' })
-
 -- Keybinds to make split navigation easier.
 set('n', '<C-h>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
 set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
@@ -36,6 +23,19 @@ set('n', ']q', '<cmd>cnext<CR>', { desc = 'Go to next [Q]uickfix item' })
 -- Buffer keymaps
 set('n', '[b', '<cmd>bprevious<CR>', { desc = 'Go to prev [B]uffer' })
 set('n', ']b', '<cmd>bnext<CR>', { desc = 'Go to next [B]uffer' })
+
+set('n', '<leader>bd', '<cmd>bd<CR>', { desc = '[B]uffer [D]delete' })
+set('n', '<leader>bo', function()
+  local current_buf = vim.fn.bufnr()
+  local current_win = vim.fn.win_getid()
+  local bufs = vim.fn.getbufinfo { buflisted = 1 }
+  for _, buf in ipairs(bufs) do
+    if buf.bufnr ~= current_buf then
+      vim.cmd('silent! bdelete ' .. buf.bufnr)
+    end
+  end
+  vim.fn.win_gotoid(current_win)
+end, { silent = true, desc = '[B]uffers delete [O]ther' })
 
 -- Convinient save
 set('i', '<C-s>', '<Esc><cmd>w<CR>')
