@@ -1,5 +1,7 @@
 local set = vim.keymap.set
 
+set('n', '<leader>Q', '<cmd>q<CR>', { desc = '[Q]uit vim' })
+
 -- Keybinds to make split navigation easier.
 set('n', '<C-h>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
 set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
@@ -23,8 +25,14 @@ set('n', ']q', '<cmd>cnext<CR>', { desc = 'Go to next [Q]uickfix item' })
 -- Buffer keymaps
 set('n', '[b', '<cmd>bprevious<CR>', { desc = 'Go to prev [B]uffer' })
 set('n', ']b', '<cmd>bnext<CR>', { desc = 'Go to next [B]uffer' })
+set('n', '<leader>bp', '<cmd>bprevious<CR>', { desc = '[P]rev [B]uffer' })
+set('n', '<leader>bn', '<cmd>bnext<CR>', { desc = '[N]ext [B]uffer' })
 
-set('n', '<leader>bd', '<cmd>bd<CR>', { desc = '[B]uffer [D]delete' })
+set('n', '<leader>bd', function()
+  local current_buf = vim.fn.bufnr()
+  vim.cmd 'silent! bprevious'
+  vim.cmd('silent! bdelete' .. current_buf)
+end, { desc = '[B]uffer [D]delete' })
 set('n', '<leader>bo', function()
   local current_buf = vim.fn.bufnr()
   local current_win = vim.fn.win_getid()
