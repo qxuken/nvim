@@ -3,7 +3,7 @@ return {
   {
     'neovim/nvim-lspconfig',
     dependencies = {
-      -- Automatically install LSPs and related tools to stdpath for Neovim
+      -- Automatically install LSPs and related tools to stdpath for Neovimlsp
       'williamboman/mason.nvim',
       'williamboman/mason-lspconfig.nvim',
       'WhoIsSethDaniel/mason-tool-installer.nvim',
@@ -102,6 +102,16 @@ return {
       local servers = {
         clangd = {},
         gopls = {},
+        html = {
+          filetypes = { 'html', 'templ' },
+        },
+        htmx = {
+          filetypes = { 'html', 'templ' },
+        },
+        tailwindcss = {
+          filetypes = { 'templ', 'astro', 'javascript', 'typescript', 'react' },
+          init_options = { userLanguages = { templ = 'html' } },
+        },
         rust_analyzer = {},
         omnisharp = {},
         eslint = {},
@@ -123,6 +133,8 @@ return {
           },
         },
       }
+
+      vim.filetype.add { extension = { templ = 'templ' } }
 
       -- Ensure the servers and tools above are installed
       --  To check the current status of installed tools and/or manually install

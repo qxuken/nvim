@@ -28,6 +28,7 @@ return {
         lua = { 'stylua' },
         go = { 'goimports', 'gofmt' },
         javascript = { { 'prettierd', 'prettier' } },
+        templ = { 'templ' },
       },
     },
   },
