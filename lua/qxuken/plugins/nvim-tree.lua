@@ -12,7 +12,11 @@ return {
       'nvim-tree/nvim-web-devicons',
     },
     config = function()
-      require('nvim-tree').setup()
+      require('nvim-tree').setup {
+        view = {
+          width = 40,
+        },
+      }
       vim.api.nvim_create_autocmd('QuitPre', {
         callback = function()
           local invalid_win = {}
