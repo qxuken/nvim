@@ -14,7 +14,7 @@ return {
     config = function()
       require('nvim-tree').setup {
         view = {
-          width = 40,
+          width = 50,
         },
       }
       vim.api.nvim_create_autocmd('QuitPre', {
