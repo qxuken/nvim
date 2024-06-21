@@ -9,6 +9,7 @@ return {
       'thenbe/neotest-playwright',
       'vim-test/vim-test',
       'nvim-neotest/neotest-vim-test',
+      'mrcjkb/rustaceanvim',
     },
     keys = {
       {
@@ -62,6 +63,7 @@ return {
             },
           },
           require 'neotest-vim-test' {},
+          require 'rustaceanvim.neotest',
         },
       }
     end,
