@@ -10,6 +10,7 @@ return {
       'vim-test/vim-test',
       'nvim-neotest/neotest-vim-test',
       'mrcjkb/rustaceanvim',
+      'nvim-neotest/neotest-jest',
     },
     keys = {
       {
@@ -63,6 +64,14 @@ return {
             },
           },
           require 'neotest-vim-test' {},
+          require 'neotest-jest' {
+            env = { CI = true, FUNCTIONAL = true },
+            -- jestCommand = 'npm test --',
+            -- jestConfigFile = 'custom.jest.config.ts',
+            -- cwd = function()
+            --   return vim.fn.getcwd()
+            -- end,
+          },
           require 'rustaceanvim.neotest',
         },
       }
