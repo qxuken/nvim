@@ -13,8 +13,7 @@ return {
           cmp.setup.buffer { sources = { { name = 'crates', buffer = event.buf } } }
 
           require('which-key').add {
-            { '<leader>cr', group = '[C]rate' },
-            { '<leader>cr_', hidden = true },
+            { '<leader>cr', group = 'Crate' },
           }
 
           local crates = require 'crates'

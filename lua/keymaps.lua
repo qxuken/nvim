@@ -1,6 +1,6 @@
 local set = vim.keymap.set
 
-set('n', '<leader>Q', '<cmd>q<CR>', { desc = '[Q]uit vim' })
+set('n', '<leader>Q', '<cmd>q<CR>', { desc = 'Quit vim' })
 
 -- Keybinds to make split navigation easier.
 set('n', '<C-h>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
@@ -13,26 +13,26 @@ vim.opt.hlsearch = true
 set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
 -- Diagnostic keymaps
-set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous [D]iagnostic message' })
-set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next [D]iagnostic message' })
-set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Show diagnostic [E]rror messages' })
-set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
+set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous Diagnostic message' })
+set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next Diagnostic message' })
+set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Show diagnostic Error messages' })
+set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic Quickfix list' })
 
 -- Quickfix keymaps
-set('n', '[q', '<cmd>cprev<CR>', { desc = 'Go to prev [Q]uickfix item' })
-set('n', ']q', '<cmd>cnext<CR>', { desc = 'Go to next [Q]uickfix item' })
+set('n', '[q', '<cmd>cprev<CR>', { desc = 'Go to prev Quickfix item' })
+set('n', ']q', '<cmd>cnext<CR>', { desc = 'Go to next Quickfix item' })
 
 -- Buffer keymaps
-set('n', '[b', '<cmd>bprevious<CR>', { desc = 'Go to prev [B]uffer' })
-set('n', ']b', '<cmd>bnext<CR>', { desc = 'Go to next [B]uffer' })
-set('n', '<leader>bp', '<cmd>bprevious<CR>', { desc = '[P]rev [B]uffer' })
-set('n', '<leader>bn', '<cmd>bnext<CR>', { desc = '[N]ext [B]uffer' })
+set('n', '[b', '<cmd>bprevious<CR>', { desc = 'Go to prev Buffer' })
+set('n', ']b', '<cmd>bnext<CR>', { desc = 'Go to next Buffer' })
+set('n', '<leader>bp', '<cmd>bprevious<CR>', { desc = 'Prev Buffer' })
+set('n', '<leader>bn', '<cmd>bnext<CR>', { desc = 'Next Buffer' })
 
 set('n', '<leader>bd', function()
   local current_buf = vim.fn.bufnr()
   vim.cmd 'silent! bprevious'
   vim.cmd('silent! bdelete' .. current_buf)
-end, { desc = '[B]uffer [D]delete' })
+end, { desc = 'Buffer delete' })
 set('n', '<leader>bo', function()
   local current_buf = vim.fn.bufnr()
   local current_win = vim.fn.win_getid()
@@ -43,15 +43,15 @@ set('n', '<leader>bo', function()
     end
   end
   vim.fn.win_gotoid(current_win)
-end, { silent = true, desc = '[B]uffers delete [O]ther' })
+end, { silent = true, desc = 'Buffers delete Other' })
 
--- Convinient save
+-- Convenient save
 set('i', '<C-s>', '<Esc><cmd>w<CR>')
 set('n', '<C-s>', '<cmd>w<CR>')
 
 -- Goto keymaps
-set({ 'n', 'v' }, 'gh', '^', { desc = '[G]o to start of the line' })
-set({ 'n', 'v' }, 'gl', '$', { desc = '[G]o to end of the line' })
+set({ 'n', 'v' }, 'gh', '^', { desc = 'Go to start of the line' })
+set({ 'n', 'v' }, 'gl', '$', { desc = 'Go to end of the line' })
 
 -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
 -- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which

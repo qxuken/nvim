@@ -1,6 +1,8 @@
 return {
   {
     'nvim-neotest/neotest',
+    lazy = true,
+    event = 'VimEnter',
     dependencies = {
       'nvim-neotest/nvim-nio',
       'nvim-lua/plenary.nvim',
@@ -18,28 +20,28 @@ return {
         function()
           require('neotest').run.run(vim.fn.expand '%')
         end,
-        desc = '[N]eoTest [F]ile',
+        desc = 'NeoTest File',
       },
       {
         '<leader>nn',
         function()
           require('neotest').run.run()
         end,
-        desc = '[N]eoTest [N]earest',
+        desc = 'NeoTest Nearest',
       },
       {
         '<leader>ns',
         function()
           require('neotest').run.stop()
         end,
-        desc = '[N]eoTest [S]top',
+        desc = 'NeoTest Stop',
       },
       {
         '<leader>na',
         function()
           require('neotest').run.attach()
         end,
-        desc = '[N]eoTest [A]ttach',
+        desc = 'NeoTest Attach',
       },
       {
         '<leader>np',
@@ -47,10 +49,14 @@ return {
           ---@diagnostic disable-next-line: undefined-field
           require('neotest').playwright.attachment()
         end,
-        desc = '[N]eoTest [P]laywright attachment',
+        desc = 'NeoTest Playwright attachment',
       },
     },
     config = function()
+      require('which-key').add {
+        { '<leader>n', group = 'Neotest' },
+      }
+
       ---@diagnostic disable-next-line: missing-fields
       require('neotest').setup {
         consumers = {

@@ -4,9 +4,9 @@ return {
     'nvim-tree/nvim-tree.lua',
     lazy = false,
     keys = {
-      { '<C-t>', '<cmd>NvimTreeToggle<CR>', desc = 'Toggle Nvim[T]ree' },
-      { '<leader>tt', '<cmd>NvimTreeToggle<CR>', desc = 'Nvim[T]ree [T]oggle' },
-      { '<leader>tf', '<cmd>NvimTreeFindFile<CR>', desc = 'Nvim[T]ree [F]indFile' },
+      { '<C-t>', '<cmd>NvimTreeToggle<CR>', desc = 'Toggle NvimTree' },
+      { '<leader>tt', '<cmd>NvimTreeToggle<CR>', desc = 'NvimTree Toggle' },
+      { '<leader>tf', '<cmd>NvimTreeFindFile<CR>', desc = 'NvimTree FindFile' },
     },
     dependencies = {
       'nvim-tree/nvim-web-devicons',

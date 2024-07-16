@@ -7,7 +7,7 @@ return {
       require('catppuccin').setup {
         transparent_background = true,
         term_colors = true,
-        intergrations = {
+        integrations = {
           cmp = true,
           dap = true,
           gitsigns = true,
