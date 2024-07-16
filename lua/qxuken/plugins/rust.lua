@@ -3,7 +3,7 @@ return {
     'saecki/crates.nvim',
     tag = 'stable',
     config = function()
-      require('crates').setup()
+      require('crates').setup {}
 
       vim.api.nvim_create_autocmd('BufRead', {
         group = vim.api.nvim_create_augroup('CmpSourceCargo', { clear = true }),
@@ -12,8 +12,9 @@ return {
           local cmp = require 'cmp'
           cmp.setup.buffer { sources = { { name = 'crates', buffer = event.buf } } }
 
-          require('which-key').register {
-            ['<leader>cr'] = { name = '[C]rate', _ = 'which_key_ignore' },
+          require('which-key').add {
+            { '<leader>cr', group = '[C]rate' },
+            { '<leader>cr_', hidden = true },
           }
 
           local crates = require 'crates'
