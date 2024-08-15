@@ -1,5 +1,4 @@
 return {
-  -- Fuzzy Finder (files, lsp, etc)
   {
     'nvim-telescope/telescope.nvim',
     event = 'VimEnter',
@@ -32,6 +31,7 @@ return {
         -- For major updates, this must be adjusted manually.
         version = '^1.0.0',
       },
+      { 'debugloop/telescope-undo.nvim' },
     },
     config = function()
       local lga_actions = require 'telescope-live-grep-args.actions'
@@ -40,11 +40,13 @@ return {
         -- You can put your default mappings / updates / etc. in here
         --  All the info you're looking for is in `:help telescope.setup()`
         --
-        -- defaults = {
-        --   mappings = {
-        --     i = { ['<c-enter>'] = 'to_fuzzy_refine' },
-        --   },
-        -- },
+        defaults = {
+          layout_strategy = 'vertical',
+          layout_config = {
+            width = 0.9,
+            height = 0.95,
+          },
+        },
         pickers = {
           buffers = {
             sort_lastused = true,
@@ -64,6 +66,9 @@ return {
               },
             },
           },
+          undo = {
+            -- telescope-undo.nvim config, see below
+          },
         },
       }
 
@@ -71,6 +76,7 @@ return {
       pcall(require('telescope').load_extension, 'fzf')
       pcall(require('telescope').load_extension, 'ui-select')
       pcall(require('telescope').load_extension, 'live_grep_args')
+      pcall(require('telescope').load_extension, 'undo')
 
       -- See `:help telescope.builtin`
       local builtin = require 'telescope.builtin'
@@ -87,6 +93,7 @@ return {
       vim.keymap.set('n', '<leader>s.', builtin.oldfiles, { desc = 'Search Recent Files ("." for repeat)' })
       vim.keymap.set('n', '<leader>j', builtin.jumplist, { desc = 'Open jumplist' })
       vim.keymap.set('n', '<leader><leader>', builtin.buffers, { desc = '  Find existing buffers' })
+      vim.keymap.set('n', '<leader>u', extensions.undo.undo, { desc = 'Undo history' })
 
       -- Slightly advanced example of overriding default behavior and theme
       vim.keymap.set('n', '<leader>/', function()
