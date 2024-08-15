@@ -11,8 +11,9 @@ return {
       'thenbe/neotest-playwright',
       'vim-test/vim-test',
       'nvim-neotest/neotest-vim-test',
-      'mrcjkb/rustaceanvim',
       'nvim-neotest/neotest-jest',
+      'mrcjkb/rustaceanvim',
+      'fredrikaverpil/neotest-golang',
     },
     keys = {
       {
@@ -79,6 +80,7 @@ return {
             -- end,
           },
           require 'rustaceanvim.neotest',
+          require 'neotest-golang',
         },
       }
     end,
