@@ -30,4 +30,13 @@ return {
       --    - Treesitter + textobjects: https://github.com/nvim-treesitter/nvim-treesitter-textobjects
     end,
   },
+
+  {
+    'ckolkey/ts-node-action',
+    dependencies = { 'nvim-treesitter' },
+    keys = {
+      { '<leader>ct', '<CMD>NodeAction<CR>', desc = 'TreeSitter Node Action' },
+    },
+    opts = {},
+  },
 }

@@ -27,9 +27,18 @@ return {
       formatters_by_ft = {
         lua = { 'stylua' },
         go = { 'goimports', 'gofmt' },
-        javascript = { { 'prettierd', 'prettier', 'eslint' } },
-        css = { { 'prettierd', 'prettier' } },
+        javascript = { 'prettierd', 'prettier', 'eslint', stop_after_first = true },
+        css = { 'prettierd', 'prettier' },
         templ = { 'templ' },
+      },
+    },
+  },
+
+  {
+    'windwp/nvim-ts-autotag',
+    opts = {
+      aliases = {
+        ['templ'] = 'html',
       },
     },
   },
