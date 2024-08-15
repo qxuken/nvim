@@ -3,6 +3,6 @@ return {
   {
     'rmagatti/auto-session',
     lazy = false,
-    opts = { auto_session_suppress_dirs = { '~/', '~/projects', '~/Downloads', '/' } },
+    opts = { auto_session_suppress_dirs = { '~/', '~/projects', '~/local-projects', '~/Downloads', '/' } },
   },
 }
