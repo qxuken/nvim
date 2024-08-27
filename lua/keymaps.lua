@@ -1,6 +1,8 @@
 local set = vim.keymap.set
 
 set('n', '<leader>Q', '<cmd>q<CR>', { desc = 'Quit vim' })
+-- Fix for wsl
+set('v', '<C-B>', '<C-V>', { desc = 'Visual block' })
 
 -- Keybinds to make split navigation easier.
 set('n', '<C-h>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
