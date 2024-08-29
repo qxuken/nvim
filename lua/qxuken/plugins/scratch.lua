@@ -17,23 +17,32 @@ return {
         use_telescope = true,
         -- fzf-lua is recommanded, since it will order the files by modification datetime desc. (require rg)
         file_picker = 'fzflua', -- "fzflua" | "telescope" | nil
-        filetypes = { 'lua', 'js', 'sh', 'ts' }, -- you can simply put filetype here
+        filetypes = { 'lua', 'js', 'sh', 'ts', 'go', 'rust' }, -- you can simply put filetype here
         filetype_details = { -- or, you can have more control here
           json = {}, -- empty table is fine
           ['yaml'] = {},
           go = {
-            requireDir = true, -- true if each scratch file requires a new directory
-            filename = 'main', -- the filename of the scratch file in the new directory
+            requireDir = true,
+            filename = 'main.go',
             content = { 'package main', '', 'func main() {', '  ', '}' },
             cursor = {
               location = { 4, 2 },
               insert_mode = true,
             },
           },
+          rust = {
+            requireDir = true,
+            filename = 'main.rs',
+            content = { '', 'fn main() {', '  ', '}' },
+            cursor = {
+              location = { 3, 2 },
+              insert_mode = true,
+            },
+          },
         },
         localKeys = {
           {
-            filenameContains = { 'js', 'ts' },
+            filenameContains = { 'js', 'ts', 'rs', 'go' },
             LocalKeys = {
               {
                 cmd = '<CMD>%SnipRun<CR>',
