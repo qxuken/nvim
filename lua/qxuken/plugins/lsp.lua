@@ -115,7 +115,6 @@ return {
         rust_analyzer = {},
         omnisharp = {},
         eslint = {},
-        tsserver = {},
         prettierd = {},
         prettier = {},
         lua_ls = {
