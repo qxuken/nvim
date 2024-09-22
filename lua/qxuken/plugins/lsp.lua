@@ -106,12 +106,15 @@ return {
       local servers = {
         clangd = {},
         gopls = {},
+        templ = {},
+        delve = {},
         html = {
           filetypes = { 'html', 'templ' },
         },
         htmx = {
           filetypes = { 'html', 'templ' },
         },
+        cssls = {},
         tailwindcss = {
           filetypes = { 'templ', 'astro', 'javascript', 'typescript', 'react' },
           init_options = { userLanguages = { templ = 'html' } },
@@ -120,8 +123,13 @@ return {
         -- disabled due to rustacean plugin
         -- rust_analyzer = {},
         -- omnisharp = {},
+        ts_ls = {},
         eslint = {},
         prettier = {},
+        jsonls = {},
+        fixjson = {},
+        markdown_oxide = {},
+        markdownlint = {},
         lua_ls = {
           -- cmd = {...},
           -- filetypes = { ...},
@@ -136,6 +144,7 @@ return {
             },
           },
         },
+        stylua = {},
       }
 
       vim.filetype.add { extension = { templ = 'templ' } }
@@ -151,9 +160,7 @@ return {
       -- You can add other tools here that you want Mason to install
       -- for you, so that they are available from within Neovim.
       local ensure_installed = vim.tbl_keys(servers or {})
-      vim.list_extend(ensure_installed, {
-        'stylua', -- Used to format Lua code
-      })
+
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
       require('mason-lspconfig').setup {
