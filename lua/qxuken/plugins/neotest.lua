@@ -72,7 +72,7 @@ return {
           },
           require 'neotest-vim-test' {},
           require 'neotest-jest' {
-            env = { CI = true, FUNCTIONAL = true },
+            env = { CI = 'true', FUNCTIONAL = 'true' },
             -- jestCommand = 'npm test --',
             -- jestConfigFile = 'custom.jest.config.ts',
             -- cwd = function()
