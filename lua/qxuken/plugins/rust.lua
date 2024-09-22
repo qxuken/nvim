@@ -1,5 +1,8 @@
 return {
   {
+    'mrcjkb/rustaceanvim',
+  },
+  {
     'saecki/crates.nvim',
     tag = 'stable',
     ft = 'toml',

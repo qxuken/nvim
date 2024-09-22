@@ -7,10 +7,9 @@ return {
       'williamboman/mason.nvim',
       'williamboman/mason-lspconfig.nvim',
       'WhoIsSethDaniel/mason-tool-installer.nvim',
-
+      'mfussenegger/nvim-dap',
       -- Useful status updates for LSP.
       { 'j-hui/fidget.nvim', opts = {} },
-
       -- `neodev` configures Lua LSP for your Neovim config, runtime and plugins
       -- used for completion, annotations and signatures of Neovim apis
       { 'folke/neodev.nvim', opts = {} },
@@ -57,6 +56,11 @@ return {
           map('<leader>ca', vim.lsp.buf.code_action, 'Code Action')
 
           map('<leader>cF', vim.lsp.buf.format, 'Code Format')
+
+          -- toggle builtin hint inlay
+          map('<leader>cI', function()
+            vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
+          end, 'Toggle Inlay Hint')
 
           -- Opens a popup that displays documentation about the word under your cursor
           --  See `:help K` for why this keymap.
@@ -112,10 +116,11 @@ return {
           filetypes = { 'templ', 'astro', 'javascript', 'typescript', 'react' },
           init_options = { userLanguages = { templ = 'html' } },
         },
-        rust_analyzer = {},
-        omnisharp = {},
+        codelldb = {},
+        -- disabled due to rustacean plugin
+        -- rust_analyzer = {},
+        -- omnisharp = {},
         eslint = {},
-        prettierd = {},
         prettier = {},
         lua_ls = {
           -- cmd = {...},
