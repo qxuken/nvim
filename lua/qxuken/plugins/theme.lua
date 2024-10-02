@@ -6,7 +6,7 @@ return {
     config = function()
       require('cyberdream').setup {
         transparent = true,
-        borderless_telescope = false,
+        borderless_telescope = true,
       }
 
       vim.cmd.colorscheme 'cyberdream'
