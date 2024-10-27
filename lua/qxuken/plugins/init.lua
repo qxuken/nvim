@@ -33,4 +33,23 @@ return {
       url_open.setup {}
     end,
   },
+
+  {
+    'laytan/cloak.nvim',
+    opts = {
+      cloak_character = vim.g.have_nerd_font and '' or '*',
+      patterns = {
+        {
+          file_pattern = '.env',
+          cloak_pattern = '=.+',
+          replace = nil,
+        },
+        {
+          file_pattern = 'vault.yml',
+          cloak_pattern = ':.+',
+          replace = nil,
+        },
+      },
+    },
+  },
 }
