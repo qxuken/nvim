@@ -24,6 +24,11 @@ set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic Quick
 set('n', '[q', '<cmd>cprev<CR>', { desc = 'Go to prev Quickfix item' })
 set('n', ']q', '<cmd>cnext<CR>', { desc = 'Go to next Quickfix item' })
 
+-- Tabs keymaps
+set('n', '[t', '<cmd>tabp<CR>', { desc = 'Go to prev tab' })
+set('n', ']t', '<cmd>tabn<CR>', { desc = 'Go to next tab' })
+set('n', 'tq', '<cmd>tabc<CR>', { desc = 'Close tab' })
+
 -- Buffer keymaps
 set('n', '[b', '<cmd>bprevious<CR>', { desc = 'Go to prev Buffer' })
 set('n', ']b', '<cmd>bnext<CR>', { desc = 'Go to next Buffer' })
