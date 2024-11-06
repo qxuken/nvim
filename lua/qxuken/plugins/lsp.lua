@@ -104,7 +104,10 @@ return {
       --  - settings (table): Override the default settings passed when initializing the server.
       --        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
       local servers = {
+        sqlls = {},
+        sqlfmt = {},
         clangd = {},
+        goimports = {},
         gopls = {},
         templ = {},
         delve = {},
@@ -125,6 +128,7 @@ return {
         -- omnisharp = {},
         ts_ls = {},
         eslint = {},
+        eslint_d = {},
         prettier = {},
         jsonls = {},
         fixjson = {},

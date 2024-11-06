@@ -17,7 +17,8 @@ return {
       format_on_save = function(bufnr)
         local disable_filetypes = { c = true, cpp = true }
         return {
-          timeout_ms = 500,
+          timeout_ms = 5000,
+          -- async = true,
           lsp_fallback = not disable_filetypes[vim.bo[bufnr].filetype],
         }
       end,
@@ -28,6 +29,7 @@ return {
         typescript = { 'eslint_d', 'prettierd', 'prettier', stop_after_first = true },
         css = { 'prettierd', 'prettier' },
         templ = { 'templ' },
+        sql = { 'sqlfmt', stop_after_first = true },
       },
     },
   },
