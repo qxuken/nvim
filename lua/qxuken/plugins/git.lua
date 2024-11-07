@@ -24,6 +24,7 @@ return {
   },
   {
     'lewis6991/gitsigns.nvim',
+    lazy = false,
     keys = {
       { ']h', '<cmd>Gitsigns next_hunk<CR>', desc = 'Next git hunk' },
       { '[h', '<cmd>Gitsigns prev_hunk<CR>', desc = 'Prev git hunk' },
