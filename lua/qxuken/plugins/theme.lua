@@ -8,7 +8,7 @@ return {
         transparent = true,
       }
 
-      vim.cmd 'colorscheme dawnfox'
+      vim.cmd 'colorscheme nightfox'
     end,
   },
   -- {
