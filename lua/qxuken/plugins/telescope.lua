@@ -87,8 +87,15 @@ return {
       vim.keymap.set('n', '<leader>f', builtin.find_files, { desc = 'Search Files' })
       vim.keymap.set('n', '<leader>ss', builtin.builtin, { desc = 'Search Select Telescope' })
       vim.keymap.set('n', '<leader>sw', builtin.grep_string, { desc = 'Search current Word' })
-      vim.keymap.set('n', '<leader>g', builtin.live_grep, { desc = 'Search by Grep' })
-      vim.keymap.set('n', '<leader>sg', extensions.live_grep_args.live_grep_args, { desc = 'Search by Grep with args' })
+      vim.keymap.set('n', '<leader>g', extensions.live_grep_args.live_grep_args, { desc = 'Search by Grep' })
+      vim.keymap.set('n', '<leader>sg', function()
+        extensions.live_grep_args.live_grep_args { search_dirs = { 'src', 'packages', 'apps' } }
+      end, { desc = 'Grep in {src, packages, apps}' })
+      vim.keymap.set('n', '<leader>sG', function()
+        local curr_dir = vim.fn.expand '%:.:h'
+        print(curr_dir)
+        extensions.live_grep_args.live_grep_args { search_dirs = { curr_dir } }
+      end, { desc = 'Grep in current dir' })
       vim.keymap.set('n', '<leader>sd', builtin.diagnostics, { desc = 'Search Diagnostics' })
       vim.keymap.set('n', '<leader>sr', builtin.resume, { desc = 'Search Resume' })
       vim.keymap.set('n', '<leader>s.', builtin.oldfiles, { desc = 'Search Recent Files ("." for repeat)' })

@@ -16,6 +16,7 @@ return {
         { '<leader>t', group = 'NvimTree' },
         { '<leader>w', group = 'Workspace' },
         { '<leader>h', group = 'Git hunks' },
+        { '<leader>y', group = 'Copy', icon = '󰆏' },
         { ']', group = 'Next' },
         { '[', group = 'Prev' },
         { 'z', group = 'Fold' },

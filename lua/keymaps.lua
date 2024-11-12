@@ -60,6 +60,26 @@ set('n', '<C-s>', '<cmd>w<CR>')
 set({ 'n', 'v' }, 'gh', '^', { desc = 'Go to start of the line' })
 set({ 'n', 'v' }, 'gl', '$', { desc = 'Go to end of the line' })
 
+-- Yank dirs and file path
+set('n', '<leader>yp', function()
+  vim.fn.setreg('+', vim.fn.expand '%:.')
+end, { desc = 'Copy file path' })
+set('n', '<leader>yP', function()
+  vim.fn.setreg('+', vim.fn.expand '%:p:.')
+end, { desc = 'Copy file full path' })
+set('n', '<leader>yd', function()
+  vim.fn.setreg('+', vim.fn.expand '%:.:h')
+end, { desc = 'Copy directory path' })
+set('n', '<leader>yD', function()
+  vim.fn.setreg('+', vim.fn.expand '%:p:h')
+end, { desc = 'Copy directory full path' })
+set('n', '<leader>yn', function()
+  vim.fn.setreg('+', vim.fn.expand '%:t')
+end, { desc = 'Copy file name' })
+set('n', '<leader>yN', function()
+  vim.fn.setreg('+', vim.fn.expand '%:t:r')
+end, { desc = 'Copy file name(without extension)' })
+
 -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
 -- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
 -- is not what someone will guess without a bit more experience.
