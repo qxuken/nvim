@@ -6,6 +6,11 @@ return {
     config = function()
       require('nightfox').setup {
         transparent = true,
+        palettes = {
+          all = {
+            bg1 = 'NONE',
+          },
+        },
       }
 
       vim.cmd 'colorscheme nightfox'
@@ -46,6 +51,7 @@ return {
   --   priority = 1000,
   --   config = function()
   --     require('catppuccin').setup {
+  --       flavour = 'mocha',
   --       transparent_background = true,
   --       -- term_colors = true,
   --       integrations = {
