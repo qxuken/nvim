@@ -28,7 +28,7 @@ set('n', ']q', '<cmd>cnext<CR>', { desc = 'Go to next Quickfix item' })
 -- Tabs keymaps
 set('n', '[t', '<cmd>tabp<CR>', { desc = 'Go to prev tab' })
 set('n', ']t', '<cmd>tabn<CR>', { desc = 'Go to next tab' })
-set('n', 'tq', '<cmd>tabc<CR>', { desc = 'Close tab' })
+set('n', '<leader>tq', '<cmd>tabc<CR>', { desc = 'Close tab' })
 
 -- Buffer keymaps
 set('n', '[b', '<cmd>bprevious<CR>', { desc = 'Go to prev Buffer' })
