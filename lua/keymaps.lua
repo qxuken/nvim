@@ -17,8 +17,9 @@ set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 -- Diagnostic keymaps
 set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous Diagnostic message' })
 set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next Diagnostic message' })
-set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Show diagnostic Error messages' })
-set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic Quickfix list' })
+-- replaced by telescope
+-- set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Show diagnostic Error messages' })
+-- set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic Quickfix list' })
 
 -- Quickfix keymaps
 set('n', '[q', '<cmd>cprev<CR>', { desc = 'Go to prev Quickfix item' })
