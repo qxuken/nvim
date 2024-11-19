@@ -129,6 +129,7 @@ return {
         eslint = {},
         eslint_d = {},
         prettier = {},
+        prettierd = {},
         jsonls = {},
         fixjson = {},
         markdown_oxide = {},
