@@ -25,6 +25,7 @@ return {
             event = 'notify',
             any = {
               { find = 'No information available' },
+              { find = 'Neogit' },
             },
           },
           view = 'mini',
@@ -44,7 +45,7 @@ return {
           view = 'mini',
         },
         {
-          filter = { event = 'msg_show', kind = 'search_count' },
+          filter = { event = 'msg_show', kind = { 'search_count', 'echo' } },
           view = 'mini',
         },
         -- {
