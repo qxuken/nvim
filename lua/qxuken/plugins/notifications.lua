@@ -22,15 +22,35 @@ return {
       routes = {
         {
           filter = {
+            event = 'notify',
+            any = {
+              { find = 'No information available' },
+            },
+          },
+          view = 'mini',
+        },
+        {
+          filter = {
             event = 'msg_show',
             any = {
               { find = '%d+L, %d+B' },
               { find = '; after #%d+' },
               { find = '; before #%d+' },
+              -- { find = '^:!' },
+              { find = '%d+ lines yanked' },
+              { find = '%d+ more lines' },
             },
           },
           view = 'mini',
         },
+        {
+          filter = { event = 'msg_show', kind = 'search_count' },
+          view = 'mini',
+        },
+        -- {
+        --   filter = { event = 'msg_show', kind = 'search_count' },
+        --   view = 'mini',
+        -- },
       },
       presets = {
         bottom_search = true, -- use a classic bottom cmdline for search
