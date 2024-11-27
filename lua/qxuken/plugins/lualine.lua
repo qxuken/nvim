@@ -120,6 +120,7 @@ return {
             },
             'filetype',
             'progress',
+            'selectioncount',
           },
           lualine_z = {
             {
