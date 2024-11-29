@@ -70,13 +70,13 @@ return {
               color = function()
                 local mode = vim.api.nvim_get_mode()['mode']
                 if mode == 'i' or mode == 'R' then
-                  return { bg = colors.blue, fg = colors.black }
+                  return { bg = colors.blue, fg = colors.black, gui = 'bold' }
                 elseif mode == 'v' or mode == 'V' or mode == '^V' then
-                  return { bg = colors.cyan, fg = colors.black }
+                  return { bg = colors.cyan, fg = colors.black, gui = 'bold' }
                 elseif mode == 'c' then
-                  return { bg = colors.red, fg = colors.black }
+                  return { bg = colors.red, fg = colors.black, gui = 'bold' }
                 else
-                  return { bg = colors.violet, fg = colors.black }
+                  return { bg = colors.violet, fg = colors.black, gui = 'bold' }
                 end
               end,
               padding = { left = 0, right = 1 },
