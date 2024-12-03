@@ -83,8 +83,11 @@ return {
             },
           },
           lualine_b = {
-            'branch',
-            'filename',
+            {
+              'filename',
+              path = 1,
+              shorting_target = 60,
+            },
             {
               function()
                 return ''
