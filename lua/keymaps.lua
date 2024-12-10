@@ -54,7 +54,7 @@ set('n', '<leader>bo', function()
 end, { silent = true, desc = 'Buffers delete Other' })
 
 -- Convenient save
-set('i', '<C-s>', '<Esc><cmd>w<CR>')
+set({ 'i', 'v' }, '<C-s>', '<Esc><cmd>w<CR>')
 set('n', '<C-s>', '<cmd>w<CR>')
 
 -- Goto keymaps
