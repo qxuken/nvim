@@ -6,7 +6,7 @@ return {
     keys = {
       { '<leader>wr', '<cmd>SessionSearch<CR>', desc = 'Session search' },
       { '<leader>wS', '<cmd>SessionSave<CR>', desc = 'Save session' },
-      { '<leader>wa', '<cmd>SessionToggleAutoSave<CR>', desc = 'Toggle autosave' },
+      { '<leader>wa', '<cmd>SessionToggleAutoSave<CR>', desc = 'Toggle session autosave' },
     },
     opts = { suppressed_dirs = { '~/', '~/projects', '~/local-projects', '~/Downloads', '/' } },
     config = function(_, opts)
