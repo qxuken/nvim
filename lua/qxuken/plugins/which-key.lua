@@ -11,7 +11,6 @@ return {
         { '<leader>b', group = 'Buffer/Blame' },
         { '<leader>c', group = 'Code' },
         { '<leader>d', group = 'Document' },
-        { '<leader>r', group = 'Rename' },
         { '<leader>s', group = 'Search' },
         { '<leader>t', group = 'NvimTree' },
         { '<leader>w', group = 'Workspace' },
