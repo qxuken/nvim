@@ -1,3 +1,24 @@
+local function harpoon_with_quick_nav(n, other)
+  local keys = other
+  for i = 1, n do
+    keys[#keys + 1] = {
+      '<M-' .. i .. '>',
+      function()
+        require('harpoon'):list():select(i)
+      end,
+      desc = 'Select ' .. i .. ' harpoon item',
+    }
+    keys[#keys + 1] = {
+      '<leader>e' .. i,
+      function()
+        require('harpoon'):list():select(i)
+      end,
+      desc = 'Select ' .. i .. ' harpoon item',
+    }
+  end
+  return keys
+end
+
 return {
   {
     'stevearc/oil.nvim',
@@ -107,7 +128,7 @@ return {
     'ThePrimeagen/harpoon',
     branch = 'harpoon2',
     dependencies = { 'nvim-lua/plenary.nvim', 'nvim-telescope/telescope.nvim' },
-    keys = {
+    keys = harpoon_with_quick_nav(9, {
       {
         '<leader>ea',
         function()
@@ -131,76 +152,6 @@ return {
         desc = 'Open harpoon ui',
       },
       {
-        '<M-1>',
-        function()
-          require('harpoon'):list():select(1)
-        end,
-        desc = 'Select 1st harpoon item',
-      },
-      {
-        '<leader>e1',
-        function()
-          require('harpoon'):list():select(1)
-        end,
-        desc = 'Select 1st harpoon item',
-      },
-      {
-        '<M-2>',
-        function()
-          require('harpoon'):list():select(2)
-        end,
-        desc = 'Select 2nd harpoon item',
-      },
-      {
-        '<leader>e2',
-        function()
-          require('harpoon'):list():select(2)
-        end,
-        desc = 'Select 2nd harpoon item',
-      },
-      {
-        '<M-3>',
-        function()
-          require('harpoon'):list():select(3)
-        end,
-        desc = 'Select 3rd harpoon item',
-      },
-      {
-        '<leader>e3',
-        function()
-          require('harpoon'):list():select(3)
-        end,
-        desc = 'Select 3rd harpoon item',
-      },
-      {
-        '<M-4>',
-        function()
-          require('harpoon'):list():select(4)
-        end,
-        desc = 'Select 4th harpoon item',
-      },
-      {
-        '<leader>e4',
-        function()
-          require('harpoon'):list():select(4)
-        end,
-        desc = 'Select 4th harpoon item',
-      },
-      {
-        '<M-5>',
-        function()
-          require('harpoon'):list():select(5)
-        end,
-        desc = 'Select 5th harpoon item',
-      },
-      {
-        '<leader>e5',
-        function()
-          require('harpoon'):list():select(5)
-        end,
-        desc = 'Select 5th harpoon item',
-      },
-      {
         '[e',
         function()
           require('harpoon'):list():prev { ui_nav_wrap = true }
@@ -214,7 +165,7 @@ return {
         end,
         desc = 'Go to next harpoon',
       },
-    },
+    }),
     config = true,
   },
   {
