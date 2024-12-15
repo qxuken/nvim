@@ -48,10 +48,42 @@ return {
 
   {
     'FabijanZulj/blame.nvim',
-    keys = {
-      { '<leader>bw', '<cmd>BlameToggle window<CR>', desc = 'Toggle git Blame window' },
-      { '<leader>bv', '<cmd>BlameToggle virtual<CR>', desc = 'Toggle git Blame virtual' },
-    },
     opts = {},
+    dependencies = {
+      'folke/snacks.nvim',
+    },
+    init = function()
+      vim.api.nvim_create_autocmd('User', {
+        pattern = 'VeryLazy',
+        callback = function()
+          Snacks.toggle
+            .new({
+              id = 'blame_virtual',
+              name = 'GitBlame Virtual',
+              get = function()
+                local blame = require 'blame'
+                return blame.is_open() or false
+              end,
+              set = function()
+                return vim.cmd 'BlameToggle virtual'
+              end,
+            })
+            :map '<leader>bv'
+          Snacks.toggle
+            .new({
+              id = 'blame_window',
+              name = 'GitBlame Window',
+              get = function()
+                local blame = require 'blame'
+                return blame.is_open() or false
+              end,
+              set = function()
+                return vim.cmd 'BlameToggle window'
+              end,
+            })
+            :map '<leader>bw'
+        end,
+      })
+    end,
   },
 }

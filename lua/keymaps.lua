@@ -36,23 +36,6 @@ set('n', ']b', '<cmd>bnext<CR>', { desc = 'Go to next Buffer' })
 set('n', '<leader>bp', '<cmd>bprevious<CR>', { desc = 'Prev Buffer' })
 set('n', '<leader>bn', '<cmd>bnext<CR>', { desc = 'Next Buffer' })
 
-set('n', '<leader>bd', function()
-  local current_buf = vim.fn.bufnr()
-  vim.cmd 'silent! bprevious'
-  vim.cmd('silent! bdelete' .. current_buf)
-end, { desc = 'Buffer delete' })
-set('n', '<leader>bo', function()
-  local current_buf = vim.fn.bufnr()
-  local current_win = vim.fn.win_getid()
-  local bufs = vim.fn.getbufinfo { buflisted = 1 }
-  for _, buf in ipairs(bufs) do
-    if buf.bufnr ~= current_buf then
-      vim.cmd('silent! bdelete ' .. buf.bufnr)
-    end
-  end
-  vim.fn.win_gotoid(current_win)
-end, { silent = true, desc = 'Buffers delete Other' })
-
 -- Convenient save
 set({ 'i', 'v' }, '<C-s>', '<Esc><cmd>w<CR>')
 set('n', '<C-s>', '<cmd>w<CR>')
@@ -88,3 +71,21 @@ end, { desc = 'Copy file name(without extension)' })
 -- NOTE: This won't work in all terminal emulators/tmux/etc. Try your own mapping
 -- or just use <C-\><C-n> to exit terminal mode
 set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
+
+-- Replaced with snacks from folke
+-- set('n', '<leader>bd', function()
+--   local current_buf = vim.fn.bufnr()
+--   vim.cmd 'silent! bprevious'
+--   vim.cmd('silent! bdelete' .. current_buf)
+-- end, { desc = 'Buffer delete' })
+-- set('n', '<leader>bo', function()
+--   local current_buf = vim.fn.bufnr()
+--   local current_win = vim.fn.win_getid()
+--   local bufs = vim.fn.getbufinfo { buflisted = 1 }
+--   for _, buf in ipairs(bufs) do
+--     if buf.bufnr ~= current_buf then
+--       vim.cmd('silent! bdelete ' .. buf.bufnr)
+--     end
+--   end
+--   vim.fn.win_gotoid(current_win)
+-- end, { silent = true, desc = 'Buffers delete Other' })

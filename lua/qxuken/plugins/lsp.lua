@@ -8,7 +8,7 @@ return {
       'WhoIsSethDaniel/mason-tool-installer.nvim',
       'mfussenegger/nvim-dap',
       -- Useful status updates for LSP.
-      -- { 'j-hui/fidget.nvim', opts = {} },
+      { 'j-hui/fidget.nvim', opts = {} },
       -- `neodev` configures Lua LSP for your Neovim config, runtime and plugins
       -- used for completion, annotations and signatures of Neovim apis
       { 'folke/neodev.nvim', opts = {} },
@@ -57,9 +57,10 @@ return {
           map('<leader>cF', vim.lsp.buf.format, 'Code Format')
 
           -- toggle builtin hint inlay
-          map('<leader>cI', function()
-            vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
-          end, 'Toggle Inlay Hint')
+          -- Replaced with snacks from folke
+          -- map('<leader>cI', function()
+          --   vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
+          -- end, 'Toggle Inlay Hint')
 
           -- Opens a popup that displays documentation about the word under your cursor
           --  See `:help K` for why this keymap.
