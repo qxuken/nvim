@@ -6,6 +6,8 @@ return {
       variant = 'main',
       dark_variant = 'dawn',
       styles = {
+        italic = false,
+        bold = true,
         transparency = false,
       },
     }
