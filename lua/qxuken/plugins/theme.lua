@@ -3,8 +3,6 @@ return {
   name = 'rose-pine',
   config = function()
     require('rose-pine').setup {
-      variant = 'main',
-      dark_variant = 'dawn',
       styles = {
         italic = false,
         bold = true,
