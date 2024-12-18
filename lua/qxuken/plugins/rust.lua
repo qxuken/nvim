@@ -1,3 +1,11 @@
+vim.g.rustaceanvim = {
+  server = {
+    on_attach = function(client, bufnr)
+      client.config.capabilities = require('blink.cmp').get_lsp_capabilities(client.config.capabilities)
+    end,
+  },
+}
+
 return {
   {
     'mrcjkb/rustaceanvim',
@@ -8,16 +16,33 @@ return {
     'saecki/crates.nvim',
     tag = 'stable',
     ft = 'toml',
+    dependencies = {
+      'saghen/blink.cmp',
+    },
     config = function()
-      require('crates').setup {}
+      require('crates').setup {
+        completion = {
+          crates = {
+            enabled = true,
+            max_results = 8,
+            min_chars = 3,
+          },
+        },
+        lsp = {
+          enabled = true,
+          on_attach = function(client, bufnr)
+            client.config.capabilities = require('blink.cmp').get_lsp_capabilities(client.config.capabilities)
+          end,
+          actions = true,
+          completion = true,
+          hover = true,
+        },
+      }
 
       vim.api.nvim_create_autocmd('BufRead', {
         group = vim.api.nvim_create_augroup('CmpSourceCargo', { clear = true }),
         pattern = 'Cargo.toml',
         callback = function(event)
-          local cmp = require 'cmp'
-          cmp.setup.buffer { sources = { { name = 'crates', buffer = event.buf } } }
-
           require('which-key').add {
             { '<leader>cr', group = 'Crate' },
           }

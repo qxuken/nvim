@@ -10,6 +10,9 @@ return {
         end,
         desc = 'Buffer Local Keymaps (which-key)',
       },
+
+      -- NOTE: Not realy for this plugin but why not)
+      { '<leader>pl', '<cmd>Lazy<cr>', desc = 'Lazy' },
     },
     config = function()
       require('which-key').setup { preset = 'helix' }
@@ -24,6 +27,7 @@ return {
         { '<leader>w', group = 'Workspace' },
         { '<leader>h', group = 'Git hunks' },
         { '<leader>e', group = 'Harpoon' },
+        { '<leader>p', group = 'Plugins' },
         { '<leader>y', group = 'Copy', icon = '󰆏' },
         { ']', group = 'Next' },
         { '[', group = 'Prev' },
