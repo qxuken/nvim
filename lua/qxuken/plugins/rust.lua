@@ -10,7 +10,37 @@ return {
   {
     'mrcjkb/rustaceanvim',
     version = '^5',
-    lazy = false,
+    ft = 'rs',
+    keys = {
+      {
+        '<leader>Gd',
+        function()
+          vim.cmd.RustLsp 'debuggables'
+        end,
+        desc = '[RustLsp] Debug',
+      },
+      {
+        '<leader>GD',
+        function()
+          vim.cmd.RustLsp { 'debuggables', bang = true }
+        end,
+        desc = '[RustLsp] Debug Previous target',
+      },
+      {
+        '<leader>Gh',
+        function()
+          vim.cmd.RustLsp 'debuggables'
+        end,
+        desc = '[RustLsp] Run',
+      },
+      {
+        '<leader>GH',
+        function()
+          vim.cmd.RustLsp { 'debuggables', bang = true }
+        end,
+        desc = '[RustLsp] Run Previous target',
+      },
+    },
   },
   {
     'saecki/crates.nvim',

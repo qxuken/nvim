@@ -28,6 +28,7 @@ return {
         { '<leader>h', group = 'Git hunks' },
         { '<leader>e', group = 'Harpoon' },
         { '<leader>p', group = 'Plugins' },
+        { '<leader>G', group = 'Debug' },
         { '<leader>y', group = 'Copy', icon = '󰆏' },
         { ']', group = 'Next' },
         { '[', group = 'Prev' },

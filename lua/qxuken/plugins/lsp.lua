@@ -168,4 +168,97 @@ return {
       }
     end,
   },
+  {
+    'rcarriga/nvim-dap-ui',
+    event = 'VeryLazy',
+    dependencies = { 'mfussenegger/nvim-dap', 'nvim-neotest/nvim-nio' },
+    keys = {
+      {
+        '<leader>Gb',
+        function()
+          require('dap').toggle_breakpoint()
+        end,
+        desc = 'Toggle Breakpoint',
+      },
+      {
+        '<leader>Gc',
+        function()
+          require('dap').continue()
+        end,
+        desc = 'Continue Execution',
+      },
+      {
+        '<leader>Gq',
+        function()
+          require('dap').terminate()
+        end,
+        desc = 'Stop Execution',
+      },
+      {
+        '<leader>GR',
+        function()
+          require('dap').restart()
+        end,
+        desc = 'Restart',
+      },
+      {
+        '<leader>Gp',
+        function()
+          require('dap').step_back()
+        end,
+        desc = 'Step Back',
+      },
+      {
+        '<leader>Go',
+        function()
+          require('dap').step_over()
+        end,
+        desc = 'Step Over',
+      },
+      {
+        '<leader>Gi',
+        function()
+          require('dap').step_into()
+        end,
+        desc = 'Step Into',
+      },
+      {
+        '<leader>Gr',
+        function()
+          require('dap').repl.open()
+        end,
+        desc = 'Repl Open',
+      },
+      {
+        '<leader>Ge',
+        function()
+          require('dapui').eval()
+        end,
+        desc = 'Eval Cursor',
+      },
+      {
+        '<leader>Gu',
+        function()
+          require('dapui').toggle()
+        end,
+        desc = 'Toggle ui',
+      },
+    },
+    config = function()
+      require('dapui').setup {}
+      local dap, dapui = require 'dap', require 'dapui'
+      dap.listeners.before.attach.dapui_config = function()
+        dapui.open()
+      end
+      dap.listeners.before.launch.dapui_config = function()
+        dapui.open()
+      end
+      dap.listeners.before.event_terminated.dapui_config = function()
+        dapui.close()
+      end
+      dap.listeners.before.event_exited.dapui_config = function()
+        dapui.close()
+      end
+    end,
+  },
 }
