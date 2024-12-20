@@ -6,9 +6,16 @@ return {
   { 'numToStr/Comment.nvim', opts = {} },
 
   {
+    'mbbill/undotree',
+    keys = {
+      { '<leader>u', '<cmd>UndotreeToggle<cr>', desc = 'Toggle Undo Tree' },
+    },
+  },
+
+  {
     'folke/todo-comments.nvim',
     event = 'VimEnter',
-    keys = { { '<leader>st', '<cmd>TodoTelescope keywords=TODO<cr>', desc = 'Search TODO' } },
+    keys = { { '<leader>st', '<cmd>TodoFzfLua keywords=TODO<cr>', desc = 'Search TODO' } },
     dependencies = { 'nvim-lua/plenary.nvim' },
     opts = { signs = false },
   },
@@ -20,7 +27,7 @@ return {
     event = 'VeryLazy',
     cmd = 'URLOpenUnderCursor',
     keys = {
-      { 'gx', '<esc>:URLOpenUnderCursor<cr>', desc = 'Go to link under cursor' },
+      { 'gx', '<cmd>URLOpenUnderCursor<cr>', desc = 'Go to link under cursor' },
     },
     config = function()
       local status_ok, url_open = pcall(require, 'url-open')

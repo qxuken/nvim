@@ -127,7 +127,7 @@ return {
   {
     'ThePrimeagen/harpoon',
     branch = 'harpoon2',
-    dependencies = { 'nvim-lua/plenary.nvim', 'nvim-telescope/telescope.nvim' },
+    dependencies = { 'nvim-lua/plenary.nvim' },
     keys = harpoon_with_quick_nav(9, {
       {
         '<leader>ea',

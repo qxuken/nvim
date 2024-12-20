@@ -18,7 +18,7 @@ return {
     dependencies = {
       'nvim-lua/plenary.nvim',
       'sindrets/diffview.nvim',
-      'nvim-telescope/telescope.nvim',
+      'ibhagwan/fzf-lua',
     },
     config = true,
   },
@@ -29,7 +29,7 @@ return {
       { ']h', '<cmd>Gitsigns next_hunk<CR>', desc = 'Next git hunk' },
       { '[h', '<cmd>Gitsigns prev_hunk<CR>', desc = 'Prev git hunk' },
       { '<leader>hrr', '<cmd>Gitsigns reset_hunk<CR>', desc = 'Git hunk reset' },
-      -- { '<leader>hd', '<cmd>Gitsigns diffthis<CR>', desc = 'Git hunk diff' },
+      { '<leader>hd', '<cmd>Gitsigns diffthis<CR>', desc = 'Git hunk diff' },
       { '<leader>ds', '<cmd>Gitsigns stage_buffer<cr>', desc = 'git stage buffer' },
       { '<leader>hs', '<cmd>Gitsigns stage_hunk<cr>', desc = 'git stage hunk' },
       { '<leader>hu', '<cmd>Gitsigns undo_stage_hunk<cr>', desc = 'git unstage hunk' },
