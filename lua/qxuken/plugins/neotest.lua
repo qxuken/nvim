@@ -6,9 +6,7 @@ return {
     dependencies = {
       'nvim-neotest/nvim-nio',
       'nvim-lua/plenary.nvim',
-      'antoinemadec/FixCursorHold.nvim',
       'nvim-treesitter/nvim-treesitter',
-      'thenbe/neotest-playwright',
       'vim-test/vim-test',
       'nvim-neotest/neotest-vim-test',
       'nvim-neotest/neotest-jest',
@@ -44,32 +42,14 @@ return {
         end,
         desc = 'NeoTest Attach',
       },
-      {
-        '<leader>np',
-        function()
-          ---@diagnostic disable-next-line: undefined-field
-          require('neotest').playwright.attachment()
-        end,
-        desc = 'NeoTest Playwright attachment',
-      },
     },
     config = function()
       require('which-key').add {
         { '<leader>n', group = 'Neotest' },
       }
 
-      ---@diagnostic disable-next-line: missing-fields
       require('neotest').setup {
-        consumers = {
-          playwright = require('neotest-playwright.consumers').consumers,
-        },
         adapters = {
-          require('neotest-playwright').adapter {
-            options = {
-              persist_project_selection = true,
-              enable_dynamic_test_discovery = true,
-            },
-          },
           require 'neotest-vim-test' {},
           require 'neotest-jest' {
             env = { CI = 'true', FUNCTIONAL = 'true' },

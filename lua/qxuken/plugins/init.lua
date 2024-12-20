@@ -24,7 +24,6 @@ return {
   {
     'sontungexpt/url-open',
     branch = 'mini',
-    event = 'VeryLazy',
     cmd = 'URLOpenUnderCursor',
     keys = {
       { 'gx', '<cmd>URLOpenUnderCursor<cr>', desc = 'Go to link under cursor' },
