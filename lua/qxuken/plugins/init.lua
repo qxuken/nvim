@@ -8,16 +8,25 @@ return {
   {
     'mbbill/undotree',
     keys = {
-      { '<leader>u', '<cmd>UndotreeToggle<cr>', desc = 'Toggle Undo Tree' },
+      { '<leader>u', '<cmd>UndotreeToggle<cr>', desc = '[UndoTree] Toggle' },
     },
   },
 
   {
     'folke/todo-comments.nvim',
     event = 'VimEnter',
-    keys = { { '<leader>st', '<cmd>TodoFzfLua keywords=TODO<cr>', desc = 'Search TODO' } },
+    keys = {
+      { '<leader>sT', '<cmd>TodoFzfLua<cr>', desc = '[TODO] Search All' },
+      {
+        '<leader>st',
+        function()
+          require('todo-comments.fzf').todo { keywords = { 'TODO', 'FIX' } }
+        end,
+        desc = '[TODO] Search (TODO,FIX) only',
+      },
+    },
     dependencies = { 'nvim-lua/plenary.nvim' },
-    opts = { signs = false },
+    opts = {},
   },
 
   -- Effortlessly open the URL under the cursor
@@ -26,7 +35,7 @@ return {
     branch = 'mini',
     cmd = 'URLOpenUnderCursor',
     keys = {
-      { 'gx', '<cmd>URLOpenUnderCursor<cr>', desc = 'Go to link under cursor' },
+      { 'gx', '<cmd>URLOpenUnderCursor<cr>', desc = '[Link] Go to' },
     },
     config = function()
       local status_ok, url_open = pcall(require, 'url-open')

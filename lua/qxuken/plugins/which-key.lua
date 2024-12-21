@@ -12,7 +12,7 @@ return {
       },
 
       -- NOTE: Not realy for this plugin but why not)
-      { '<leader>pl', '<cmd>Lazy<cr>', desc = 'Lazy' },
+      { '<leader>pl', '<cmd>Lazy<cr>', desc = '[Lazy] open' },
     },
     config = function()
       require('which-key').setup { preset = 'helix' }
@@ -23,10 +23,10 @@ return {
         { '<leader>c', group = 'Code' },
         { '<leader>d', group = 'Document' },
         { '<leader>s', group = 'Search' },
-        { '<leader>t', group = 'NvimTree' },
+        { '<leader>t', group = 'Tabs' },
         { '<leader>w', group = 'Workspace' },
         { '<leader>h', group = 'Git hunks' },
-        { '<leader>e', group = 'Harpoon' },
+        { '<leader>e', group = 'Harpoon', icon = '󱡀' },
         { '<leader>p', group = 'Plugins' },
         { '<leader>G', group = 'Debug' },
         { '<leader>y', group = 'Copy', icon = '󰆏' },

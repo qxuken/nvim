@@ -1,3 +1,16 @@
+local function capitalize_and_concat(str)
+  local parts = {}
+  for part in string.gmatch(str, '([^_]+)') do
+    table.insert(parts, part)
+  end
+
+  for i, part in ipairs(parts) do
+    parts[i] = string.upper(string.sub(part, 1, 1)) .. string.sub(part, 2)
+  end
+
+  return table.concat(parts, ' ')
+end
+
 vim.g.rustaceanvim = {
   server = {
     on_attach = function(client, bufnr)
@@ -78,30 +91,36 @@ return {
           }
 
           local crates = require 'crates'
-          local with_desc = function(desc)
-            return { silent = true, desc = desc, buffer = event.buf }
+          local bind_fn = function(opts)
+            local keymap = opts[1]
+            local fn = opts[2]
+            return vim.keymap.set(opts.mode or 'n', keymap, crates[fn], {
+              desc = opts.desc or capitalize_and_concat(fn),
+              silent = true,
+              buffer = event.buf,
+            })
           end
-          vim.keymap.set('n', '<leader>crt', crates.toggle, with_desc 'toggle')
-          vim.keymap.set('n', '<leader>crr', crates.reload, with_desc 'reload')
+          bind_fn { '<leader>crt', 'toggle' }
+          bind_fn { '<leader>crr', 'reload' }
 
-          vim.keymap.set('n', '<leader>crv', crates.show_versions_popup, with_desc 'show_versions_popup')
-          vim.keymap.set('n', '<leader>crf', crates.show_features_popup, with_desc 'show_features_popup')
-          vim.keymap.set('n', '<leader>crd', crates.show_dependencies_popup, with_desc 'show_dependencies_popup')
+          bind_fn { '<leader>crv', 'show_versions_popup' }
+          bind_fn { '<leader>crf', 'show_features_popup' }
+          bind_fn { '<leader>crd', 'show_dependencies_popup' }
 
-          vim.keymap.set('n', '<leader>cru', crates.update_crate, with_desc 'update_crate')
-          vim.keymap.set('v', '<leader>cru', crates.update_crates, with_desc 'update_crates')
-          vim.keymap.set('n', '<leader>cra', crates.update_all_crates, with_desc 'update_all_crates')
-          vim.keymap.set('n', '<leader>crU', crates.upgrade_crate, with_desc 'upgrade_crate')
-          vim.keymap.set('v', '<leader>crU', crates.upgrade_crates, with_desc 'upgrade_crates')
-          vim.keymap.set('n', '<leader>crA', crates.upgrade_all_crates, with_desc 'upgrade_all_crates')
+          bind_fn { '<leader>cri', 'update_crate' }
+          bind_fn { '<leader>crI', 'upgrade_crate' }
+          bind_fn { '<leader>cru', 'update_crates' }
+          bind_fn { '<leader>crU', 'upgrade_crates' }
+          bind_fn { '<leader>cra', 'update_all_crates' }
+          bind_fn { '<leader>crA', 'upgrade_all_crates' }
 
-          vim.keymap.set('n', '<leader>crx', crates.expand_plain_crate_to_inline_table, with_desc 'expand_plain_crate_to_inline_table')
-          vim.keymap.set('n', '<leader>crX', crates.extract_crate_into_table, with_desc 'extract_crate_into_table')
+          bind_fn { '<leader>crx', 'expand_plain_crate_to_inline_table' }
+          bind_fn { '<leader>crX', 'extract_crate_into_table' }
 
-          vim.keymap.set('n', '<leader>crH', crates.open_homepage, with_desc 'open_homepage')
-          vim.keymap.set('n', '<leader>crR', crates.open_repository, with_desc 'open_repository')
-          vim.keymap.set('n', '<leader>crD', crates.open_documentation, with_desc 'open_documentation')
-          vim.keymap.set('n', '<leader>crC', crates.open_crates_io, with_desc 'open_crates_io')
+          bind_fn { '<leader>crH', 'open_homepage' }
+          bind_fn { '<leader>crR', 'open_repository' }
+          bind_fn { '<leader>crD', 'open_documentation' }
+          bind_fn { '<leader>crC', 'open_crates_io' }
         end,
       })
     end,

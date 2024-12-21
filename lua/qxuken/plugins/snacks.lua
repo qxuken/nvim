@@ -9,21 +9,21 @@ return {
         function()
           Snacks.bufdelete.delete()
         end,
-        desc = 'Buffer delete',
+        desc = '[Buffer] delete',
       },
       {
         '<leader>bo',
         function()
           Snacks.bufdelete.other()
         end,
-        desc = 'Buffers delete Other',
+        desc = '[Buffers] Delete Other',
       },
       {
         '<leader>bO',
         function()
           Snacks.bufdelete.other { force = true }
         end,
-        desc = 'Buffers delete Other(Force)',
+        desc = '[Buffers] Delete Other(Force)',
       },
       {
         '<leader>R',

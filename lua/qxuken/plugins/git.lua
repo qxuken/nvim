@@ -2,18 +2,18 @@ return {
   {
     'sindrets/diffview.nvim',
     keys = {
-      { '<leader>bh', '<cmd>DiffviewFileHistory %<CR>', desc = 'Git history' },
-      { '<leader>wd', '<cmd>DiffviewOpen<CR>', desc = 'Git diff' },
-      { '<leader>wm', '<cmd>DiffviewOpen master...HEAD<CR>', desc = 'Git diff with main' },
+      { '<leader>bh', '<cmd>DiffviewFileHistory %<CR>', desc = '[GitDiff] History' },
+      { '<leader>wd', '<cmd>DiffviewOpen<CR>', desc = '[GitDiff] Diff' },
+      { '<leader>wm', '<cmd>DiffviewOpen master...HEAD<CR>', desc = '[GitDiff] Diff with main' },
     },
     opts = {},
   },
   {
     'NeogitOrg/neogit',
     keys = {
-      { '<leader>bg', '<cmd>Neogit<CR>', desc = 'Neogit' },
-      { '<leader>bl', '<cmd>NeogitLogCurrent<CR>', desc = 'File git log' },
-      { '<leader>wc', '<cmd>NeogitCommit<CR>', desc = 'Git commit' },
+      { '<leader>bg', '<cmd>Neogit<CR>', desc = '[Neogit] Open' },
+      { '<leader>bl', '<cmd>NeogitLogCurrent<CR>', desc = '[Neogit] File log' },
+      { '<leader>wc', '<cmd>NeogitCommit<CR>', desc = '[Neogit] Commit' },
     },
     dependencies = {
       'nvim-lua/plenary.nvim',
@@ -26,14 +26,14 @@ return {
     'lewis6991/gitsigns.nvim',
     lazy = false,
     keys = {
-      { ']h', '<cmd>Gitsigns next_hunk<CR>', desc = 'Next git hunk' },
-      { '[h', '<cmd>Gitsigns prev_hunk<CR>', desc = 'Prev git hunk' },
-      { '<leader>hrr', '<cmd>Gitsigns reset_hunk<CR>', desc = 'Git hunk reset' },
-      { '<leader>hd', '<cmd>Gitsigns diffthis<CR>', desc = 'Git hunk diff' },
-      { '<leader>ds', '<cmd>Gitsigns stage_buffer<cr>', desc = 'git stage buffer' },
-      { '<leader>hs', '<cmd>Gitsigns stage_hunk<cr>', desc = 'git stage hunk' },
-      { '<leader>hu', '<cmd>Gitsigns undo_stage_hunk<cr>', desc = 'git unstage hunk' },
-      { '<leader>hv', '<cmd>Gitsigns select_hunk<cr>', desc = 'git select hunk' },
+      { ']h', '<cmd>Gitsigns next_hunk<CR>', desc = '[Git] Next hunk' },
+      { '[h', '<cmd>Gitsigns prev_hunk<CR>', desc = '[Git] Prev hunk' },
+      { '<leader>hrr', '<cmd>Gitsigns reset_hunk<CR>', desc = 'Reset hunk' },
+      { '<leader>hd', '<cmd>Gitsigns diffthis<CR>', desc = 'Diff' },
+      { '<leader>ds', '<cmd>Gitsigns stage_buffer<cr>', desc = 'Stage buffer' },
+      { '<leader>hs', '<cmd>Gitsigns stage_hunk<cr>', desc = 'Stage hunk' },
+      { '<leader>hu', '<cmd>Gitsigns undo_stage_hunk<cr>', desc = 'Unstage hunk' },
+      { '<leader>hv', '<cmd>Gitsigns select_hunk<cr>', desc = 'Select hunk' },
     },
     opts = {
       signs = {
@@ -59,7 +59,7 @@ return {
           Snacks.toggle
             .new({
               id = 'blame_virtual',
-              name = 'GitBlame Virtual',
+              name = '[GitBlame] Virtual',
               get = function()
                 local blame = require 'blame'
                 return blame.is_open() or false
@@ -72,7 +72,7 @@ return {
           Snacks.toggle
             .new({
               id = 'blame_window',
-              name = 'GitBlame Window',
+              name = '[GitBlame] Window',
               get = function()
                 local blame = require 'blame'
                 return blame.is_open() or false

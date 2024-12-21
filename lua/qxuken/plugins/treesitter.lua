@@ -21,7 +21,7 @@ return {
     'ckolkey/ts-node-action',
     dependencies = { 'nvim-treesitter' },
     keys = {
-      { '<leader>ct', '<CMD>NodeAction<CR>', desc = 'TreeSitter Node Action' },
+      { '<leader>ct', '<CMD>NodeAction<CR>', desc = '[TreeSitter] Node Action' },
     },
     opts = {},
   },

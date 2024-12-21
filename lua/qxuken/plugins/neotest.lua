@@ -4,6 +4,7 @@ return {
     lazy = true,
     event = 'VimEnter',
     dependencies = {
+      'folke/which-key.nvim',
       'nvim-neotest/nvim-nio',
       'nvim-lua/plenary.nvim',
       'nvim-treesitter/nvim-treesitter',
@@ -19,28 +20,28 @@ return {
         function()
           require('neotest').run.run(vim.fn.expand '%')
         end,
-        desc = 'NeoTest File',
+        desc = 'Test File',
       },
       {
         '<leader>nn',
         function()
           require('neotest').run.run()
         end,
-        desc = 'NeoTest Nearest',
+        desc = 'Test Nearest',
       },
       {
         '<leader>ns',
         function()
           require('neotest').run.stop()
         end,
-        desc = 'NeoTest Stop',
+        desc = 'Test Stop',
       },
       {
         '<leader>na',
         function()
           require('neotest').run.attach()
         end,
-        desc = 'NeoTest Attach',
+        desc = 'Test Attach',
       },
     },
     config = function()

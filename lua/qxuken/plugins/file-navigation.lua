@@ -6,14 +6,14 @@ local function harpoon_with_quick_nav(n, other)
       function()
         require('harpoon'):list():select(i)
       end,
-      desc = 'Select ' .. i .. ' harpoon item',
+      desc = '[Harp] Select ' .. i .. ' item',
     }
     keys[#keys + 1] = {
       '<leader>e' .. i,
       function()
         require('harpoon'):list():select(i)
       end,
-      desc = 'Select ' .. i .. ' harpoon item',
+      desc = 'Select ' .. i .. ' item',
     }
   end
   return keys
@@ -24,7 +24,7 @@ return {
     'stevearc/oil.nvim',
     dependencies = { { 'echasnovski/mini.icons', opts = {} } },
     keys = {
-      { '-', '<CMD>Oil<CR>', desc = 'Open parent directory' },
+      { '-', '<CMD>Oil<CR>', desc = '[Oil] Open' },
     },
     config = function()
       -- helper function to parse output
@@ -134,14 +134,14 @@ return {
         function()
           require('harpoon'):list():add()
         end,
-        desc = 'Add buffer to harpoon',
+        desc = 'Add buffer',
       },
       {
         '<leader>ed',
         function()
           require('harpoon'):list():remove()
         end,
-        desc = 'Remove buffer from harpoon',
+        desc = 'Remove buffer',
       },
       {
         '<leader>ee',
@@ -149,21 +149,21 @@ return {
           local h = require 'harpoon'
           h.ui:toggle_quick_menu(h:list())
         end,
-        desc = 'Open harpoon ui',
+        desc = 'Open ui',
       },
       {
         '[e',
         function()
           require('harpoon'):list():prev { ui_nav_wrap = true }
         end,
-        desc = 'Go to prev harpoon',
+        desc = '[Harp] Go to prev',
       },
       {
         ']e',
         function()
           require('harpoon'):list():next { ui_nav_wrap = true }
         end,
-        desc = 'Go to next harpoon',
+        desc = '[Harp] Go to next',
       },
     }),
     config = true,

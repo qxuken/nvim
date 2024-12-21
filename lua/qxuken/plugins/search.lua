@@ -38,7 +38,7 @@ return {
         desc = 'Search Help',
       },
       {
-        '<leader>sc',
+        '<leader>sC',
         '<cmd>FzfLua commands<cr>',
         silent = true,
         desc = 'Search Commands',

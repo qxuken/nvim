@@ -3,8 +3,8 @@ return {
     'rmagatti/auto-session',
     lazy = false,
     keys = {
-      { '<leader>wr', '<cmd>SessionSearch<CR>', desc = 'Session search' },
-      { '<leader>wS', '<cmd>SessionSave<CR>', desc = 'Save session' },
+      { '<leader>wr', '<cmd>SessionSearch<CR>', desc = '[Session] Search' },
+      { '<leader>wS', '<cmd>SessionSave<CR>', desc = '[Session] Save' },
     },
     opts = { suppressed_dirs = { '~/', '~/projects', '~/local-projects', '~/Downloads', '/' } },
     config = function(_, opts)
@@ -19,7 +19,7 @@ return {
           Snacks.toggle
             .new({
               id = 'session_autosave',
-              name = 'Session autosave',
+              name = '[Session] Autosave',
               get = function()
                 return require('auto-session.config').auto_save
               end,
