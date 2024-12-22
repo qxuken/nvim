@@ -24,13 +24,13 @@ return {
       require('fzf-lua').register_ui_select()
     end,
     keys = {
-      {
-        '<C-x><C-f>',
-        '<cmd>FzfLua complete_path<cr>',
-        silent = true,
-        desc = 'Fuzzy complete path',
-        mode = { 'n', 'v', 'i' },
-      },
+      -- {
+      --   '<C-x><C-f>',
+      --   '<cmd>FzfLua complete_path<cr>',
+      --   silent = true,
+      --   desc = 'Fuzzy complete path',
+      --   mode = { 'n', 'v', 'i' },
+      -- },
       {
         '<leader>sh',
         '<cmd>FzfLua helptags<cr>',
