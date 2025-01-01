@@ -60,7 +60,8 @@ vim.opt.splitbelow = true
 --  and `:help 'listchars'`
 vim.opt.list = true
 vim.opt.tabstop = 4
-vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
+vim.opt.shiftwidth = 4
+vim.opt.listchars = { tab = vim.g.have_nerd_font and '󰇥 ' or '» ', trail = '·', nbsp = '␣' }
 
 -- Preview substitutions live, as you type!
 vim.opt.inccommand = 'split'

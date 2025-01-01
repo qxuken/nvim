@@ -12,23 +12,6 @@ return {
     },
   },
 
-  {
-    'folke/todo-comments.nvim',
-    event = 'VimEnter',
-    keys = {
-      { '<leader>sT', '<cmd>TodoFzfLua<cr>', desc = '[TODO] Search All' },
-      {
-        '<leader>st',
-        function()
-          require('todo-comments.fzf').todo { keywords = { 'TODO', 'FIX' } }
-        end,
-        desc = '[TODO] Search (TODO,FIX) only',
-      },
-    },
-    dependencies = { 'nvim-lua/plenary.nvim' },
-    opts = {},
-  },
-
   -- Effortlessly open the URL under the cursor
   {
     'sontungexpt/url-open',
