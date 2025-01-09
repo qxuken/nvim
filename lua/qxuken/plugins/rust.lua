@@ -15,6 +15,23 @@ vim.g.rustaceanvim = {
   server = {
     on_attach = function(client, bufnr)
       client.config.capabilities = require('blink.cmp').get_lsp_capabilities(client.config.capabilities)
+
+      vim.keymap.set('n', '<leader>Gd', function()
+        vim.cmd.RustLsp 'debuggables'
+      end, { desc = '[RustLsp] Debug' })
+      vim.keymap.set('n', '<leader>GD', function()
+        vim.cmd.RustLsp { 'debuggables', bang = true }
+      end, { desc = '[RustLsp] Debug Previous target' })
+      vim.keymap.set('n', '<leader>Gh', function()
+        vim.cmd.RustLsp 'debuggables'
+      end, {
+        desc = '[RustLsp] Run',
+      })
+      vim.keymap.set('n', '<leader>GH', function()
+        vim.cmd.RustLsp { 'debuggables', bang = true }
+      end, {
+        desc = '[RustLsp] Run Previous target',
+      })
     end,
   },
 }
@@ -24,36 +41,6 @@ return {
     'mrcjkb/rustaceanvim',
     version = '^5',
     ft = 'rs',
-    keys = {
-      {
-        '<leader>Gd',
-        function()
-          vim.cmd.RustLsp 'debuggables'
-        end,
-        desc = '[RustLsp] Debug',
-      },
-      {
-        '<leader>GD',
-        function()
-          vim.cmd.RustLsp { 'debuggables', bang = true }
-        end,
-        desc = '[RustLsp] Debug Previous target',
-      },
-      {
-        '<leader>Gh',
-        function()
-          vim.cmd.RustLsp 'debuggables'
-        end,
-        desc = '[RustLsp] Run',
-      },
-      {
-        '<leader>GH',
-        function()
-          vim.cmd.RustLsp { 'debuggables', bang = true }
-        end,
-        desc = '[RustLsp] Run Previous target',
-      },
-    },
   },
   {
     'saecki/crates.nvim',
