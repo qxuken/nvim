@@ -38,10 +38,17 @@ return {
       bigfile = { enabled = true },
       quickfile = { enabled = true },
       bufdelete = { enabled = true },
-      dim = { enabled = true },
+      dim = {
+        enabled = true,
+        animate = {
+          easing = 'outSine',
+          duration = { step = 15, total = 250 },
+        },
+      },
       scope = { enabled = true },
       toggle = { enabled = true },
       dashboard = { enabled = true },
+      animate = { fps = 144 },
     },
     init = function()
       vim.api.nvim_create_autocmd('User', {
