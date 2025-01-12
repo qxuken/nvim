@@ -14,6 +14,7 @@ return {
     },
     keys = {
       { '<leader>pm', '<cmd>Mason<cr>', desc = 'Mason' },
+      { '<leader>pl', '<cmd>LspInfo<cr>', desc = '[Lsp] info' },
     },
     config = function()
       vim.filetype.add { extension = { templ = 'templ' } }

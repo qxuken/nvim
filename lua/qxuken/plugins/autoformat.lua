@@ -11,6 +11,12 @@ return {
         mode = '',
         desc = 'Format buffer',
       },
+      {
+        '<leader>pc',
+        '<cmd>ConformInfo<cr>',
+        mode = '',
+        desc = '[Conform] Info',
+      },
     },
     opts = {
       notify_on_error = false,

@@ -97,7 +97,7 @@ return {
       },
 
       -- NOTE: Not realy for this plugin but why not)
-      { '<leader>pl', '<cmd>Lazy<cr>', desc = '[Lazy] open' },
+      { '<leader>pp', '<cmd>Lazy<cr>', desc = '[Lazy] open' },
     },
     config = function()
       require('which-key').setup { preset = 'helix' }
