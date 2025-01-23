@@ -111,7 +111,13 @@ return {
         -- disabled due to rustacean plugin
         -- rust_analyzer = {},
         -- omnisharp = {},
-        ts_ls = {},
+        ts_ls = {
+          init_options = {
+            preferences = {
+              includeCompletionsForModuleExports = false,
+            },
+          },
+        },
         eslint = {},
         eslint_d = {},
         prettier = {},
