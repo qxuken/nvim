@@ -103,10 +103,10 @@ return {
           filetypes = { 'html', 'templ' },
         },
         cssls = {},
-        tailwindcss = {
-          filetypes = { 'templ', 'astro', 'javascript', 'typescript', 'react' },
-          init_options = { userLanguages = { templ = 'html' } },
-        },
+        -- tailwindcss = {
+        --   filetypes = { 'templ', 'astro', 'javascript', 'typescript', 'react' },
+        --   init_options = { userLanguages = { templ = 'html' } },
+        -- },
         codelldb = {},
         -- disabled due to rustacean plugin
         -- rust_analyzer = {},
@@ -118,7 +118,6 @@ return {
             },
           },
         },
-        eslint = {},
         eslint_d = {},
         prettier = {},
         prettierd = {},
