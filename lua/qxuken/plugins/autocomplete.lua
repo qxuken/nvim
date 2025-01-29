@@ -47,6 +47,10 @@ return {
         },
       },
       'folke/lazydev.nvim',
+      {
+        'Kaiser-Yang/blink-cmp-dictionary',
+        dependencies = { 'nvim-lua/plenary.nvim' },
+      },
     },
     opts = {
       snippets = {
@@ -66,6 +70,18 @@ return {
       sources = {
         default = { 'lsp', 'path', 'snippets', 'buffer', 'lazydev' },
         providers = {
+          lsp = {
+            async = true,
+          },
+          buffer = {
+            opts = {
+              get_bufnrs = function()
+                return vim.tbl_filter(function(bufnr)
+                  return vim.bo[bufnr].buftype == ''
+                end, vim.api.nvim_list_bufs())
+              end,
+            },
+          },
           lazydev = { name = 'LazyDev', module = 'lazydev.integrations.blink' },
         },
       },
