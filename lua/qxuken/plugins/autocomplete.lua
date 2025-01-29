@@ -47,10 +47,11 @@ return {
         },
       },
       'folke/lazydev.nvim',
-      {
-        'Kaiser-Yang/blink-cmp-dictionary',
-        dependencies = { 'nvim-lua/plenary.nvim' },
-      },
+      -- Intresting plugin but leave it commented for better days
+      -- {
+      --   'Kaiser-Yang/blink-cmp-dictionary',
+      --   dependencies = { 'nvim-lua/plenary.nvim' },
+      -- },
     },
     opts = {
       snippets = {
