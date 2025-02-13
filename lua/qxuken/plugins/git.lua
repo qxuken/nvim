@@ -37,7 +37,7 @@ return {
       { '[h', '<cmd>Gitsigns prev_hunk<CR>', desc = '[Git] Prev hunk' },
       { '<leader>hrr', '<cmd>Gitsigns reset_hunk<CR>', desc = 'Reset hunk' },
       { '<leader>hd', '<cmd>Gitsigns diffthis<CR>', desc = 'Diff' },
-      { '<leader>ds', '<cmd>Gitsigns stage_buffer<cr>', desc = 'Stage buffer' },
+      { '<leader>dS', '<cmd>Gitsigns stage_buffer<cr>', desc = 'Stage buffer' },
       { '<leader>hs', '<cmd>Gitsigns stage_hunk<cr>', desc = 'Stage hunk' },
       { '<leader>hu', '<cmd>Gitsigns undo_stage_hunk<cr>', desc = 'Unstage hunk' },
       { '<leader>hv', '<cmd>Gitsigns select_hunk<cr>', desc = 'Select hunk' },
