@@ -1,6 +1,11 @@
+local function is_git_project()
+  return vim.fn.isdirectory '.git' ~= 0
+end
+
 return {
   {
     'sindrets/diffview.nvim',
+    cond = is_git_project,
     keys = {
       { '<leader>bh', '<cmd>DiffviewFileHistory %<CR>', desc = '[GitDiff] History' },
       { '<leader>wd', '<cmd>DiffviewOpen<CR>', desc = '[GitDiff] Diff' },
@@ -10,6 +15,7 @@ return {
   },
   {
     'NeogitOrg/neogit',
+    cond = is_git_project,
     keys = {
       { '<leader>bg', '<cmd>Neogit<CR>', desc = '[Neogit] Open' },
       { '<leader>bl', '<cmd>NeogitLogCurrent<CR>', desc = '[Neogit] File log' },
@@ -25,6 +31,7 @@ return {
   {
     'lewis6991/gitsigns.nvim',
     lazy = false,
+    cond = is_git_project,
     keys = {
       { ']h', '<cmd>Gitsigns next_hunk<CR>', desc = '[Git] Next hunk' },
       { '[h', '<cmd>Gitsigns prev_hunk<CR>', desc = '[Git] Prev hunk' },
@@ -49,6 +56,7 @@ return {
   {
     'FabijanZulj/blame.nvim',
     opts = {},
+    cond = is_git_project,
     dependencies = {
       'folke/snacks.nvim',
     },
