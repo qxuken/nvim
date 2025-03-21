@@ -49,6 +49,7 @@ return {
       toggle = { enabled = true },
       dashboard = { enabled = true },
       animate = { fps = 144 },
+      image = { enabled = true },
     },
     init = function()
       vim.api.nvim_create_autocmd('User', {
@@ -121,4 +122,6 @@ return {
       }
     end,
   },
+  'folke/lazydev.nvim',
+  'folke/neoconf.nvim',
 }

@@ -10,6 +10,7 @@ return {
       'j-hui/fidget.nvim',
       'ibhagwan/fzf-lua',
       'saghen/blink.cmp',
+      { 'folke/neoconf.nvim', config = true },
       { 'folke/lazydev.nvim', ft = 'lua', opts = {} },
     },
     keys = {
