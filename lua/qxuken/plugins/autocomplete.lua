@@ -86,6 +86,27 @@ return {
           lazydev = { name = 'LazyDev', module = 'lazydev.integrations.blink' },
         },
       },
+      completion = {
+        accept = {
+          auto_brackets = {
+            enabled = true,
+          },
+        },
+        documentation = {
+          auto_show = true,
+          auto_show_delay_ms = 200,
+        },
+      },
+    },
+  },
+
+  {
+    'danymat/neogen',
+    config = { snippet_engine = 'luasnip' },
+    dependencies = {
+      {
+        'L3MON4D3/LuaSnip',
+      },
     },
   },
 }
