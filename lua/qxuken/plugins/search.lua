@@ -10,6 +10,11 @@ return {
         winopts = {
           backdrop = 100,
           fullscreen = true,
+          preview = {
+            vertical = 'down:45%',
+            horizontal = 'right:40%',
+            layout = 'horizontal',
+          },
         },
         keymap = {
           builtin = {
