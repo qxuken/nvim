@@ -136,6 +136,9 @@ return {
         },
         stylua = {},
       }
+      local non_installable_servers = {
+        nushell = {},
+      }
 
       require('mason').setup()
 
@@ -153,6 +156,9 @@ return {
           end,
         },
       }
+      for server_name, server_opt in pairs(non_installable_servers) do
+        require('lspconfig')[server_name].setup(server_opt)
+      end
     end,
   },
   {
