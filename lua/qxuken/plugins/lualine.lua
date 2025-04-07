@@ -153,7 +153,7 @@ return {
           lualine_z = { 'location' },
         },
         tabline = {},
-        extensions = { 'oil', 'nvim-dap-ui', 'lazy', 'mason', 'fzf' },
+        extensions = { 'quickfix', 'oil', 'nvim-dap-ui', 'lazy', 'mason', 'fzf' },
       }
     end,
   },

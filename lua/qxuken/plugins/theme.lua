@@ -12,6 +12,7 @@ return {
         LspReferenceText = { fg = 'text', bg = 'leaf', blend = 20, inherit = false },
         LspReferenceRead = { fg = 'base', bg = 'leaf', inherit = false },
         LspReferenceWrite = { fg = 'text', bg = 'leaf', blend = 20, inherit = false },
+        StatusLine = { bg = 'base' },
       },
     }
 
