@@ -1,21 +1,29 @@
 return {
-  'rose-pine/neovim',
-  name = 'rose-pine',
-  config = function()
-    require('rose-pine').setup {
-      styles = {
-        italic = false,
-        bold = true,
-        transparency = false,
-      },
-      highlight_groups = {
-        LspReferenceText = { fg = 'text', bg = 'leaf', blend = 20, inherit = false },
-        LspReferenceRead = { fg = 'base', bg = 'leaf', inherit = false },
-        LspReferenceWrite = { fg = 'text', bg = 'leaf', blend = 20, inherit = false },
-        StatusLine = { bg = 'base' },
-      },
-    }
-
-    vim.cmd 'colorscheme rose-pine'
-  end,
+  {
+    'f-person/auto-dark-mode.nvim',
+    opts = true,
+  },
+  {
+    'catppuccin/nvim',
+    name = 'catppuccin',
+    priority = 1000,
+    config = function()
+      require('catppuccin').setup {
+        show_end_of_buffer = true,
+        integrations = {
+          blink_cmp = true,
+          diffview = true,
+          fidget = true,
+          harpoon = true,
+          mason = true,
+          neotest = true,
+          snacks = {
+            enabled = true,
+          },
+          which_key = true,
+        },
+      }
+      vim.cmd 'colorscheme catppuccin'
+    end,
+  },
 }
