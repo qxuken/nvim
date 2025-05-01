@@ -11,7 +11,7 @@ return {
           if vim.fn.executable 'make' == 0 then
             return
           end
-          return 'make install_jsregexp'
+          return 'make install_jsregexp CC=gcc'
         end)(),
         keys = {
           {
