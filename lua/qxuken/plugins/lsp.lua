@@ -110,7 +110,7 @@ return {
         },
         cssls = {},
         tailwindcss = {
-          filetypes = { 'templ', 'astro', 'javascript', 'typescript', 'react' },
+          filetypes = { 'templ', 'astro', 'javascript', 'typescript', 'javascriptreact', 'typescriptreact', 'react' },
           init_options = { userLanguages = { templ = 'html' } },
         },
         codelldb = {},
