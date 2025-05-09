@@ -87,16 +87,20 @@ return {
         },
       },
       completion = {
+        menu = { border = 'rounded' },
         accept = {
           auto_brackets = {
-            enabled = true,
+            enabled = false,
           },
         },
         documentation = {
+          window = { border = 'rounded' },
           auto_show = true,
           auto_show_delay_ms = 200,
         },
       },
+      -- In favor of ray-x/lsp_signature.nvim
+      signature = { enabled = false, window = { border = 'rounded' } },
     },
   },
 

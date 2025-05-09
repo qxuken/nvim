@@ -1,15 +1,20 @@
 return {
   {
-    'neovim/nvim-lspconfig',
+    'mason-org/mason.nvim',
     lazy = false,
     dependencies = {
-      'williamboman/mason.nvim',
-      'williamboman/mason-lspconfig.nvim',
+      'neovim/nvim-lspconfig',
+      'mason-org/mason-lspconfig.nvim',
       'WhoIsSethDaniel/mason-tool-installer.nvim',
       'mfussenegger/nvim-dap',
       'j-hui/fidget.nvim',
       'ibhagwan/fzf-lua',
       'saghen/blink.cmp',
+      {
+        'ray-x/lsp_signature.nvim',
+        event = 'InsertEnter',
+        opts = {},
+      },
       { 'folke/neoconf.nvim', config = true },
       { 'folke/lazydev.nvim', ft = 'lua', opts = {} },
     },
@@ -68,7 +73,9 @@ return {
           --   vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
           -- end, 'Toggle Inlay Hint')
 
-          map('K', vim.lsp.buf.hover, 'Hover Documentation')
+          map('K', function()
+            vim.lsp.buf.hover { border = 'rounded' }
+          end, 'Hover Documentation')
 
           map('gD', vim.lsp.buf.declaration, 'Goto Declaration')
 
@@ -87,8 +94,6 @@ return {
         end,
       })
 
-      local capabilities = require('blink.cmp').get_lsp_capabilities(vim.lsp.protocol.make_client_capabilities())
-
       local servers = {
         sqlls = {},
         sqlfmt = {},
@@ -104,14 +109,13 @@ return {
           filetypes = { 'html', 'templ' },
         },
         cssls = {},
-        -- tailwindcss = {
-        --   filetypes = { 'templ', 'astro', 'javascript', 'typescript', 'react' },
-        --   init_options = { userLanguages = { templ = 'html' } },
-        -- },
+        tailwindcss = {
+          filetypes = { 'templ', 'astro', 'javascript', 'typescript', 'react' },
+          init_options = { userLanguages = { templ = 'html' } },
+        },
         codelldb = {},
-        -- disabled due to rustacean plugin
+        -- Disabled due to rustacean plugin
         -- rust_analyzer = {},
-        -- omnisharp = {},
         ts_ls = {},
         eslint = {},
         eslint_d = {},
@@ -120,7 +124,6 @@ return {
         jsonls = {},
         fixjson = {},
         markdown_oxide = {},
-        markdownlint = {},
         lua_ls = {
           -- cmd = {...},
           -- filetypes = { ...},
@@ -143,21 +146,19 @@ return {
       require('mason').setup()
 
       local ensure_installed = vim.tbl_keys(servers or {})
-
-      require('mason-tool-installer').setup { ensure_installed = ensure_installed }
-
-      require('mason-lspconfig').setup {
-        handlers = {
-          function(server_name)
-            local server = servers[server_name] or {}
-            server.capabilities =
-              vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {}, require('blink.cmp').get_lsp_capabilities(server.capabilities))
-            require('lspconfig')[server_name].setup(server)
-          end,
-        },
+      require('mason-tool-installer').setup {
+        ensure_installed = ensure_installed,
       }
-      for server_name, server_opt in pairs(non_installable_servers) do
-        require('lspconfig')[server_name].setup(server_opt)
+      require('mason-lspconfig').setup {
+        automatic_enable = true,
+      }
+
+      local all_servers = vim.tbl_extend('error', servers, non_installable_servers)
+      for server_name in pairs(non_installable_servers) do
+        vim.lsp.enable(server_name)
+      end
+      for server_name, server_opt in pairs(all_servers) do
+        vim.lsp.config(server_name, server_opt)
       end
     end,
   },

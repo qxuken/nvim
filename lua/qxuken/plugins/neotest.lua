@@ -12,6 +12,7 @@ return {
     'nvim-neotest/neotest-jest',
     'mrcjkb/rustaceanvim',
     'fredrikaverpil/neotest-golang',
+    'marilari88/neotest-vitest',
   },
   keys = {
     {
@@ -50,7 +51,7 @@ return {
 
     require('neotest').setup {
       adapters = {
-        require 'neotest-vim-test' {},
+        require 'neotest-vitest',
         require 'neotest-jest' {
           env = { CI = 'true', FUNCTIONAL = 'true' },
           -- jestCommand = 'npm test --',
@@ -61,6 +62,9 @@ return {
         },
         require 'rustaceanvim.neotest',
         require 'neotest-golang',
+        require 'neotest-vim-test' {
+          ignore_file_types = { 'rust', 'go', 'javascript', 'typescript' },
+        },
       },
     }
   end,
