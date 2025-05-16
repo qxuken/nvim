@@ -158,7 +158,9 @@ return {
         vim.lsp.enable(server_name)
       end
       for server_name, server_opt in pairs(all_servers) do
-        vim.lsp.config(server_name, server_opt)
+        if not vim.tbl_isempty(server_opt) then
+          vim.lsp.config(server_name, server_opt)
+        end
       end
     end,
   },
