@@ -58,6 +58,9 @@ return {
             min_chars = 3,
           },
         },
+        popup = {
+          border = 'rounded',
+        },
         lsp = {
           enabled = true,
           on_attach = function(client, bufnr)
