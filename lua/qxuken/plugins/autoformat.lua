@@ -33,8 +33,8 @@ return {
       formatters_by_ft = {
         lua = { 'stylua' },
         go = { 'goimports', 'gofmt' },
-        javascript = { 'eslint_d', 'prettierd' },
-        typescript = { 'eslint_d', 'prettierd', stop_after_first = true },
+        javascript = { 'prettierd', 'eslint_d' },
+        typescript = { 'prettierd', 'eslint_d' },
         css = { 'prettierd', 'prettier' },
         templ = { 'templ' },
         sql = { 'sqlfmt', stop_after_first = true },
