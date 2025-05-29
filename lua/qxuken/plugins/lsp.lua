@@ -116,7 +116,7 @@ return {
         codelldb = {},
         -- Disabled due to rustacean plugin
         -- rust_analyzer = {},
-        ts_ls = {},
+        -- ts_ls = {},
         eslint = {},
         eslint_d = {},
         prettier = {},
