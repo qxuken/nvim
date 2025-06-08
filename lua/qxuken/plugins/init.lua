@@ -32,7 +32,7 @@ return {
   {
     'laytan/cloak.nvim',
     opts = {
-      cloak_character = vim.g.have_nerd_font and '' or '*',
+      cloak_character = vim.g.have_nerd_font and '🔑' or '*',
       patterns = {
         {
           file_pattern = '.env',

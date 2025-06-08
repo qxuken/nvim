@@ -3,10 +3,52 @@ return {
     'folke/snacks.nvim',
     priority = 1000,
     lazy = false,
+    ---@type snacks.Config
+    opts = {
+      bigfile = { enabled = true },
+      quickfile = { enabled = true },
+      bufdelete = { enabled = true },
+      dim = {
+        enabled = true,
+        animate = {
+          easing = 'outSine',
+          duration = { step = 15, total = 250 },
+        },
+      },
+      scope = { enabled = true },
+      toggle = { enabled = true },
+      dashboard = { enabled = true },
+      animate = { fps = 144 },
+      image = { enabled = true },
+      explorer = { enabled = true },
+      picker = {
+        enabled = true,
+        layout = {
+          preset = 'vertical',
+          -- layout = {
+          --   width = 0.85,
+          -- },
+          -- preset = 'sidebar',
+          -- layout = {
+          --   width = 0.4,
+          -- },
+        },
+      },
+    },
+    init = function()
+      vim.api.nvim_create_autocmd('User', {
+        pattern = 'VeryLazy',
+        callback = function()
+          Snacks.toggle.dim():map '<leader>dd'
+          Snacks.toggle.inlay_hints():map '<leader>cI'
+        end,
+      })
+    end,
     keys = {
       {
         '<leader>bd',
         function()
+          local s = require 'snacks'
           Snacks.bufdelete.delete()
         end,
         desc = '[Buffer] delete',
@@ -32,47 +74,131 @@ return {
         end,
         desc = 'Rename File',
       },
-    },
-    ---@type snacks.Config
-    opts = {
-      bigfile = { enabled = true },
-      quickfile = { enabled = true },
-      bufdelete = { enabled = true },
-      dim = {
-        enabled = true,
-        animate = {
-          easing = 'outSine',
-          duration = { step = 15, total = 250 },
-        },
-      },
-      scope = { enabled = true },
-      toggle = { enabled = true },
-      dashboard = { enabled = true },
-      animate = { fps = 144 },
-      image = { enabled = true },
-    },
-    init = function()
-      vim.api.nvim_create_autocmd('User', {
-        pattern = 'VeryLazy',
-        callback = function()
-          Snacks.toggle.dim():map '<leader>dd'
-          Snacks.toggle.inlay_hints():map '<leader>cI'
+
+      {
+        '<leader>sp',
+        function()
+          Snacks.picker()
         end,
-      })
-    end,
+        silent = true,
+        desc = 'Open Search Picker',
+      },
+      {
+        '<leader>sh',
+        function()
+          Snacks.picker.help()
+        end,
+        silent = true,
+        desc = 'Search Help',
+      },
+      {
+        '<leader>f',
+        function()
+          Snacks.picker.files()
+        end,
+        silent = true,
+        desc = 'Search Files',
+      },
+      {
+        '<leader>E',
+        function()
+          Snacks.picker.explorer()
+        end,
+        silent = true,
+        desc = 'Search Explorer',
+      },
+      {
+        '<leader>g',
+        function()
+          Snacks.picker.grep()
+        end,
+        silent = true,
+        desc = 'Search by Grep',
+      },
+      {
+        '<leader>sg',
+        function()
+          local dir = string.match(vim.fn.expand '%:.:h', '(%w+)')
+          Snacks.picker.grep { cwd = dir }
+        end,
+        desc = 'Search by Grep Buffer Level One',
+      },
+      {
+        '<leader>sG',
+        function()
+          local dir = vim.fn.expand '%:.:h'
+          Snacks.picker.grep { cwd = dir }
+        end,
+        desc = 'Search by Grep Buffer Dir',
+      },
+      {
+        '<leader>sr',
+        function()
+          Snacks.picker.resume()
+        end,
+        silent = true,
+        desc = 'Search Resume',
+      },
+      {
+        '<leader><leader>',
+        function()
+          Snacks.picker.buffers()
+        end,
+        silent = true,
+        desc = 'Find Buffers',
+      },
+      {
+        '<leader>.',
+        function()
+          Snacks.picker.smart()
+        end,
+        silent = true,
+        desc = 'Smart find',
+      },
+      {
+        '<leader>m',
+        function()
+          Snacks.picker.marks()
+        end,
+        silent = true,
+        desc = 'Search Marks',
+      },
+      {
+        '<leader>/',
+        function()
+          Snacks.picker.lines()
+        end,
+        silent = true,
+        desc = 'Fuzzily Search Buffer',
+      },
+      {
+        '<leader>sn',
+        function()
+          local dir = vim.fn.stdpath 'config'
+          Snacks.picker.files { cwd = dir }
+        end,
+        desc = 'Search Neovim files',
+      },
+    },
   },
 
   {
     'folke/todo-comments.nvim',
     event = 'VimEnter',
     keys = {
-      { '<leader>sT', '<cmd>TodoFzfLua<cr>', desc = '[TODO] Search All' },
+      {
+        '<leader>sT',
+        function()
+          Snacks.picker.todo_comments()
+        end,
+        desc = '[TODO] Search All',
+      },
       {
         '<leader>st',
         function()
-          require('todo-comments.fzf').todo { keywords = { 'TODO', 'FIX' } }
+          Snacks.picker.todo_comments { keywords = { 'TODO', 'FIX', 'FIXME' } }
         end,
-        desc = '[TODO] Search (TODO,FIX) only',
+        desc = '[TODO] Search (TODO,FIX,FIXME) only',
       },
     },
     dependencies = { 'nvim-lua/plenary.nvim' },

@@ -8,8 +8,8 @@ return {
       'WhoIsSethDaniel/mason-tool-installer.nvim',
       'mfussenegger/nvim-dap',
       'j-hui/fidget.nvim',
-      'ibhagwan/fzf-lua',
       'saghen/blink.cmp',
+      'folke/snacks.nvim',
       {
         'ray-x/lsp_signature.nvim',
         event = 'InsertEnter',
@@ -35,27 +35,39 @@ return {
           -- Jump to the definition of the word under your cursor.
           --  This is where a variable was first declared, or where a function is defined, etc.
           --  To jump back, press <C-t>.
-          map('gd', require('fzf-lua').lsp_definitions, 'Goto Definition')
+          map('gd', function()
+            Snacks.picker.lsp_definitions()
+          end, 'Goto Definition')
 
           -- Find references for the word under your cursor.
-          map('gr', require('fzf-lua').lsp_references, 'Goto References')
+          map('gr', function()
+            Snacks.picker.lsp_references()
+          end, 'Goto References')
 
           -- Jump to the implementation of the word under your cursor.
           --  Useful when your language has ways of declaring types without an actual implementation.
-          map('gI', require('fzf-lua').lsp_implementations, 'Goto Implementation')
+          map('gI', function()
+            Snacks.picker.lsp_implementations()
+          end, 'Goto Implementation')
 
           -- Jump to the type of the word under your cursor.
           --  Useful when you're not sure what type a variable is and you want to see
           --  the definition of its *type*, not where it was *defined*.
-          map('<leader>D', require('fzf-lua').lsp_typedefs, 'Type Definition')
+          map('<leader>D', function()
+            Snacks.picker.lsp_type_definitions()
+          end, 'Type Definition')
 
           -- Fuzzy find all the symbols in your current document.
           --  Symbols are things like variables, functions, types, etc.
-          map('<leader>ds', require('fzf-lua').lsp_document_symbols, 'Document Symbols')
+          map('<leader>ds', function()
+            Snacks.picker.lsp_symbols()
+          end, 'Document Symbols')
 
           -- Fuzzy find all the symbols in your current workspace.
           --  Similar to document symbols, except searches over your entire project.
-          map('<leader>ws', require('fzf-lua').lsp_workspace_symbols, 'Workspace Symbols')
+          map('<leader>ws', function()
+            Snacks.picker.lsp_workspace_symbols()
+          end, 'Workspace Symbols')
 
           -- Rename the variable under your cursor.
           --  Most Language Servers support renaming across files, etc.
