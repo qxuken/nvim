@@ -1,6 +1,6 @@
 local set = vim.keymap.set
 
-set('n', '<leader>Q', '<cmd>q<CR>', { desc = 'Quit vim' })
+set('n', '<leader>Q', '<cmd>qa<CR>', { desc = 'Quit vim' })
 -- Fix for wsl
 set('v', '<C-B>', '<C-V>', { desc = 'Visual block' })
 
