@@ -25,13 +25,22 @@ return {
         enabled = true,
         layout = {
           preset = 'vertical',
+          fullscreen = true,
           -- layout = {
-          --   width = 0.85,
+          --   width = 0.9,
+          --   max_width = 130,
+          --   height = 0.95,
           -- },
           -- preset = 'sidebar',
           -- layout = {
           --   width = 0.4,
           -- },
+        },
+        formatters = {
+          file = {
+            -- filename_first = true,
+            truncate = vim.fn.winwidth(0),
+          },
         },
       },
     },
@@ -102,7 +111,7 @@ return {
       {
         '<leader>E',
         function()
-          Snacks.picker.explorer()
+          Snacks.picker.explorer { auto_close = true }
         end,
         silent = true,
         desc = 'Search Explorer',
