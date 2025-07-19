@@ -48,7 +48,7 @@ return {
       vim.api.nvim_create_autocmd('User', {
         pattern = 'VeryLazy',
         callback = function()
-          Snacks.toggle.dim():map '<leader>dd'
+          Snacks.toggle.dim():map '<leader>d'
           Snacks.toggle.inlay_hints():map '<leader>cI'
         end,
       })

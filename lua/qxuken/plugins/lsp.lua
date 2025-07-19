@@ -59,9 +59,12 @@ return {
 
           -- Fuzzy find all the symbols in your current document.
           --  Symbols are things like variables, functions, types, etc.
-          map('<leader>ds', function()
+          map('<leader>bs', function()
             Snacks.picker.lsp_symbols()
-          end, 'Document Symbols')
+          end, 'Buffer Symbols')
+          map('<leader>cs', function()
+            Snacks.picker.lsp_symbols()
+          end, 'Buffer Symbols')
 
           -- Fuzzy find all the symbols in your current workspace.
           --  Similar to document symbols, except searches over your entire project.
