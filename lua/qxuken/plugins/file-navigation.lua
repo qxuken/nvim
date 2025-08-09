@@ -147,7 +147,7 @@ return {
         '<leader>ee',
         function()
           local h = require 'harpoon'
-          h.ui:toggle_quick_menu(h:list())
+          h.ui:toggle_quick_menu(h:list(), { height_in_lines = math.min(vim.fn.winheight(0), 24), ui_width_ratio = 0.85 })
         end,
         desc = 'Open ui',
       },
