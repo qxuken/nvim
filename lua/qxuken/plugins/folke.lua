@@ -1,3 +1,34 @@
+---@param conf? snacks.picker.Config
+function with_picker_config(conf)
+  local picker_config = {
+    layout = {
+      preset = 'vertical',
+      fullscreen = true,
+      -- layout = {
+      --   width = 0.9,
+      --   max_width = 130,
+      --   height = 0.95,
+      -- },
+      -- preset = 'sidebar',
+      -- layout = {
+      --   width = 0.4,
+      -- },
+    },
+    formatters = {
+      file = {
+        -- filename_first = true,
+        truncate = vim.fn.winwidth(0),
+      },
+    },
+  }
+
+  if conf ~= nil and not vim.tbl_isempty(conf) then
+    return vim.tbl_extend('force', picker_config, conf)
+  else
+    return picker_config
+  end
+end
+
 return {
   {
     'folke/snacks.nvim',
@@ -23,25 +54,6 @@ return {
       explorer = { enabled = true },
       picker = {
         enabled = true,
-        layout = {
-          preset = 'vertical',
-          fullscreen = true,
-          -- layout = {
-          --   width = 0.9,
-          --   max_width = 130,
-          --   height = 0.95,
-          -- },
-          -- preset = 'sidebar',
-          -- layout = {
-          --   width = 0.4,
-          -- },
-        },
-        formatters = {
-          file = {
-            -- filename_first = true,
-            truncate = vim.fn.winwidth(0),
-          },
-        },
       },
     },
     init = function()
@@ -87,7 +99,7 @@ return {
       {
         '<leader>sp',
         function()
-          Snacks.picker()
+          Snacks.picker(with_picker_config())
         end,
         silent = true,
         desc = 'Open Search Picker',
@@ -95,7 +107,7 @@ return {
       {
         '<leader>sh',
         function()
-          Snacks.picker.help()
+          Snacks.picker.help(with_picker_config())
         end,
         silent = true,
         desc = 'Search Help',
@@ -103,7 +115,7 @@ return {
       {
         '<leader>f',
         function()
-          Snacks.picker.files()
+          Snacks.picker.files(with_picker_config())
         end,
         silent = true,
         desc = 'Search Files',
@@ -111,7 +123,7 @@ return {
       {
         '<leader>E',
         function()
-          Snacks.picker.explorer { auto_close = true }
+          Snacks.picker.explorer(with_picker_config { auto_close = true })
         end,
         silent = true,
         desc = 'Search Explorer',
@@ -119,7 +131,7 @@ return {
       {
         '<leader>g',
         function()
-          Snacks.picker.grep()
+          Snacks.picker.grep(with_picker_config())
         end,
         silent = true,
         desc = 'Search by Grep',
@@ -128,7 +140,7 @@ return {
         '<leader>sg',
         function()
           local dir = string.match(vim.fn.expand '%:.:h', '(%w+)')
-          Snacks.picker.grep { cwd = dir }
+          Snacks.picker.grep(with_picker_config { cwd = dir })
         end,
         desc = 'Search by Grep Buffer Level One',
       },
@@ -136,14 +148,14 @@ return {
         '<leader>sG',
         function()
           local dir = vim.fn.expand '%:.:h'
-          Snacks.picker.grep { cwd = dir }
+          Snacks.picker.grep(with_picker_config { cwd = dir })
         end,
         desc = 'Search by Grep Buffer Dir',
       },
       {
         '<leader>sr',
         function()
-          Snacks.picker.resume()
+          Snacks.picker.resume(with_picker_config())
         end,
         silent = true,
         desc = 'Search Resume',
@@ -151,7 +163,7 @@ return {
       {
         '<leader><leader>',
         function()
-          Snacks.picker.buffers()
+          Snacks.picker.buffers(with_picker_config())
         end,
         silent = true,
         desc = 'Find Buffers',
@@ -159,7 +171,7 @@ return {
       {
         '<leader>.',
         function()
-          Snacks.picker.smart()
+          Snacks.picker.smart(with_picker_config())
         end,
         silent = true,
         desc = 'Smart find',
@@ -167,7 +179,7 @@ return {
       {
         '<leader>m',
         function()
-          Snacks.picker.marks()
+          Snacks.picker.marks(with_picker_config())
         end,
         silent = true,
         desc = 'Search Marks',
@@ -175,7 +187,7 @@ return {
       {
         '<leader>/',
         function()
-          Snacks.picker.lines()
+          Snacks.picker.lines(with_picker_config())
         end,
         silent = true,
         desc = 'Fuzzily Search Buffer',
@@ -184,7 +196,7 @@ return {
         '<leader>sn',
         function()
           local dir = vim.fn.stdpath 'config'
-          Snacks.picker.files { cwd = dir }
+          Snacks.picker.files(with_picker_config { cwd = dir })
         end,
         desc = 'Search Neovim files',
       },
@@ -198,14 +210,14 @@ return {
       {
         '<leader>sT',
         function()
-          Snacks.picker.todo_comments()
+          Snacks.picker.todo_comments(with_picker_config())
         end,
         desc = '[TODO] Search All',
       },
       {
         '<leader>st',
         function()
-          Snacks.picker.todo_comments { keywords = { 'TODO', 'FIX', 'FIXME' } }
+          Snacks.picker.todo_comments(with_picker_config { keywords = { 'TODO', 'FIX', 'FIXME' } })
         end,
         desc = '[TODO] Search (TODO,FIX,FIXME) only',
       },

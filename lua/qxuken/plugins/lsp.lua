@@ -36,40 +36,40 @@ return {
           --  This is where a variable was first declared, or where a function is defined, etc.
           --  To jump back, press <C-t>.
           map('gd', function()
-            Snacks.picker.lsp_definitions()
+            Snacks.picker.lsp_definitions(with_picker_config())
           end, 'Goto Definition')
 
           -- Find references for the word under your cursor.
           map('gr', function()
-            Snacks.picker.lsp_references()
+            Snacks.picker.lsp_references(with_picker_config())
           end, 'Goto References')
 
           -- Jump to the implementation of the word under your cursor.
           --  Useful when your language has ways of declaring types without an actual implementation.
           map('gI', function()
-            Snacks.picker.lsp_implementations()
+            Snacks.picker.lsp_implementations(with_picker_config())
           end, 'Goto Implementation')
 
           -- Jump to the type of the word under your cursor.
           --  Useful when you're not sure what type a variable is and you want to see
           --  the definition of its *type*, not where it was *defined*.
           map('<leader>D', function()
-            Snacks.picker.lsp_type_definitions()
+            Snacks.picker.lsp_type_definitions(with_picker_config())
           end, 'Type Definition')
 
           -- Fuzzy find all the symbols in your current document.
           --  Symbols are things like variables, functions, types, etc.
           map('<leader>bs', function()
-            Snacks.picker.lsp_symbols()
+            Snacks.picker.lsp_symbols(with_picker_config())
           end, 'Buffer Symbols')
           map('<leader>cs', function()
-            Snacks.picker.lsp_symbols()
+            Snacks.picker.lsp_symbols(with_picker_config())
           end, 'Buffer Symbols')
 
           -- Fuzzy find all the symbols in your current workspace.
           --  Similar to document symbols, except searches over your entire project.
           map('<leader>ws', function()
-            Snacks.picker.lsp_workspace_symbols()
+            Snacks.picker.lsp_workspace_symbols(with_picker_config())
           end, 'Workspace Symbols')
 
           -- Rename the variable under your cursor.
