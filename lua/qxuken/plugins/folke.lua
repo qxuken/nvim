@@ -1,19 +1,6 @@
 ---@param conf? snacks.picker.Config
 function with_picker_config(conf)
   local picker_config = {
-    layout = {
-      preset = 'vertical',
-      fullscreen = true,
-      -- layout = {
-      --   width = 0.9,
-      --   max_width = 130,
-      --   height = 0.95,
-      -- },
-      -- preset = 'sidebar',
-      -- layout = {
-      --   width = 0.4,
-      -- },
-    },
     formatters = {
       file = {
         -- filename_first = true,
@@ -54,6 +41,19 @@ return {
       explorer = { enabled = true },
       picker = {
         enabled = true,
+        layout = {
+          preset = 'vertical',
+          fullscreen = true,
+          -- layout = {
+          --   width = 0.9,
+          --   max_width = 130,
+          --   height = 0.95,
+          -- },
+          -- preset = 'sidebar',
+          -- layout = {
+          --   width = 0.4,
+          -- },
+        },
       },
     },
     init = function()
