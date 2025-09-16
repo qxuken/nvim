@@ -156,6 +156,7 @@ return {
       }
       local non_installable_servers = {
         nushell = {},
+        gdscript = {},
       }
 
       require('mason').setup()
