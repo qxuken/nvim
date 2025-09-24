@@ -4,7 +4,7 @@ function with_picker_config(conf)
     formatters = {
       file = {
         -- filename_first = true,
-        truncate = vim.fn.winwidth(0),
+        truncate = vim.o.columns,
       },
     },
   }
