@@ -1,6 +1,19 @@
 ---@param conf? snacks.picker.Config
 function with_picker_config(conf)
   local picker_config = {
+    layout = {
+      preset = 'vertical',
+      fullscreen = true,
+      -- layout = {
+      --   width = 0.9,
+      --   max_width = 130,
+      --   height = 0.95,
+      -- },
+      -- preset = 'sidebar',
+      -- layout = {
+      --   width = 0.4,
+      -- },
+    },
     formatters = {
       file = {
         -- filename_first = true,
@@ -35,25 +48,11 @@ return {
       },
       scope = { enabled = true },
       toggle = { enabled = true },
-      dashboard = { enabled = true },
       animate = { fps = 144 },
       image = { enabled = true },
       explorer = { enabled = true },
       picker = {
         enabled = true,
-        layout = {
-          preset = 'vertical',
-          fullscreen = true,
-          -- layout = {
-          --   width = 0.9,
-          --   max_width = 130,
-          --   height = 0.95,
-          -- },
-          -- preset = 'sidebar',
-          -- layout = {
-          --   width = 0.4,
-          -- },
-        },
       },
     },
     init = function()
@@ -123,7 +122,7 @@ return {
       {
         '<leader>E',
         function()
-          Snacks.picker.explorer(with_picker_config { auto_close = true })
+          Snacks.picker.explorer()
         end,
         silent = true,
         desc = 'Search Explorer',
@@ -230,6 +229,22 @@ return {
     'folke/persistence.nvim',
     event = 'BufReadPre', -- this will only start session saving when an actual file was opened
     config = true,
+    keys = {
+      {
+        '<leader>wr',
+        function()
+          require('persistence').load()
+        end,
+        desc = 'Restore session',
+      },
+      {
+        '<leader>wR',
+        function()
+          require('persistence').select()
+        end,
+        desc = 'Pick session',
+      },
+    },
   },
 
   {
